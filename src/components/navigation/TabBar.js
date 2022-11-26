@@ -1,9 +1,7 @@
 import * as React from 'react'
 import {
-  Text,
   View,
   StyleSheet,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   Animated,
 } from 'react-native'
@@ -41,11 +39,11 @@ const TabBar = ({ state, descriptors, navigation }) => {
       case 'locations':
         _name = 'map-marker' + _outlineName
         break
-      case 'bookmarks':
-        _name = 'bookmark' + _outlineName
+      case 'bookings':
+        _name = 'calendar' + _outlineName
         break
-      case 'account':
-        _name = 'account' + _outlineName
+      case 'notifications':
+        _name = 'bell' + _outlineName
         break
       case 'settings':
         _name = 'tune'
@@ -116,15 +114,15 @@ const styles = StyleSheet.create({
   container: {
     // borderWidth: 1,
     flexDirection: 'row',
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
     position: 'absolute',
-    bottom: 15,
+    bottom: 0,
     // backgroundColor: 'red',
     backgroundColor: '#EEEEEE',
     paddingHorizontal: 10,
     paddingVertical: 10,
-    borderRadius: 50,
+    // borderRadius: 50,
   },
   navAction: {
     flex: 1,
@@ -132,7 +130,7 @@ const styles = StyleSheet.create({
   },
   navActionBtn: {
     // borderWidth: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     justifyContent: 'center',
   },
   navActionBtnFocused: {

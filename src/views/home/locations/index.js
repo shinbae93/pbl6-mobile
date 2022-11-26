@@ -5,7 +5,7 @@ import TabBar from './TabBar'
 
 const { height } = Dimensions.get('screen')
 
-export default function Bookings(props) {
+export default function Locations(props) {
   const { data, tabs } = props
 
   const [selectedTab, setSelectedTab] = useState()
@@ -40,9 +40,8 @@ export default function Bookings(props) {
 const styles = StyleSheet.create({
   container: {
     zIndex: 2,
-    height: height / 1.6,
-    marginTop: -90,
-
+    height: height / 1.2,
+    marginTop: -140,
     backgroundColor: '#fff',
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,

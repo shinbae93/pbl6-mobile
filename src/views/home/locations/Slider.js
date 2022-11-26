@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
-import * as RootNavigation from '../../../navigation/RootNavigation'
+import * as RootNavigation from '../../../utils/RootNavigation'
 import Booking from './Booking'
 
 export default function Slider(props) {

@@ -7,9 +7,6 @@ export default function TopBar(props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.section}>
-        <Icon name={menuIcon} color='#edecec' size={22} />
-      </View>
       <View style={[styles.section, { alignItems: 'flex-end' }]}>
         <TouchableWithoutFeedback onPress={profileAction}>
           <View style={styles.profileImageWrapper}>

@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, Dimensions, SafeAreaView } from 'react-native'
-import TopBar from '../components/home/TopBar'
-import Search from '../components/home/Search'
-import Background from '../components/home/Background'
-import Bookings from '../components/home/bookings/index'
-import * as RootNavigation from '../navigation/RootNavigation'
+import TopBar from './home/TopBar'
+import Search from './home/Search'
+import Background from '../components/Background'
+import Locations from './home/locations/index'
+import * as RootNavigation from '../utils/RootNavigation'
 
 const { height } = Dimensions.get('screen')
 
@@ -58,12 +58,12 @@ export default function Home() {
             profileAction={() => RootNavigation.pop()}
           />
           <Search
-            title='Search your desire hotel'
-            inputPlaceholder='Search the hotel, motel and club'
+            title='Search your desire space'
+            inputPlaceholder='Search the house, room, etc'
           />
         </View>
       </View>
-      <Bookings data={bookings} tabs={bookingTabs} />
+      <Locations data={bookings} tabs={bookingTabs} />
     </SafeAreaView>
   )
 }
