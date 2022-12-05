@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import * as RootNavigation from '../utils/RootNavigation'
+import * as RootNavigation from '../navigation/RootNavigation'
 import axios from 'axios'
 
 // TODO: need to code UI and logic after, just a copy now
-export default function FotgotPassword() {}
+export const Register = () => {}
 
 const styles = StyleSheet.create({
   container: {

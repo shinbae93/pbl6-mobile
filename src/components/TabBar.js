@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const TabBar = ({ state, descriptors, navigation }) => {
+export default function TabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options
 
   if (focusedOptions.tabBarVisible === false) {
@@ -108,8 +108,6 @@ const TabBar = ({ state, descriptors, navigation }) => {
   )
 }
 
-export default TabBar
-
 const styles = StyleSheet.create({
   container: {
     // borderWidth: 1,
@@ -118,7 +116,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     bottom: 0,
-    // backgroundColor: 'red',
     backgroundColor: '#EEEEEE',
     paddingHorizontal: 10,
     paddingVertical: 10,

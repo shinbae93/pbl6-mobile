@@ -43,7 +43,7 @@ function Booking({ item, onTap }) {
         </View>
       </View>
       <View style={styles.ratingsWrapper}>
-        <StarRating
+        {/* <StarRating
           disabled={false}
           maxStars={5}
           rating={rating}
@@ -52,7 +52,7 @@ function Booking({ item, onTap }) {
           emptyStar="star"
           fullStarColor="#dbb16c"
           emptyStarColor="#6a6751"
-        />
+        /> */}
       </View>
     </View>
   )

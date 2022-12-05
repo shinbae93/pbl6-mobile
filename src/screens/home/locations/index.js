@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
-import Slider from './Slider'
 import TabBar from './TabBar'
 
 const { height } = Dimensions.get('screen')
@@ -22,7 +21,7 @@ export default function Locations(props) {
   }, [selectedTab])
 
   const _chooseBookings = (type) => {
-    setBookingContent(<Slider key={type} items={data} />)
+    // setBookingContent(<Slider key={type} items={data} />)
   }
 
   return (
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
   container: {
     zIndex: 2,
     height: height / 1.2,
-    marginTop: -140,
+    // marginTop: -140,
     backgroundColor: '#fff',
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,

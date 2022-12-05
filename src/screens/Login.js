@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
   View,
   Text,
@@ -8,15 +8,51 @@ import {
   TouchableHighlight,
   TextInput,
   TouchableWithoutFeedback,
+  Alert,
 } from 'react-native'
-import * as RootNavigation from '../utils/RootNavigation'
+import * as RootNavigation from '../navigation/RootNavigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import axios from 'axios'
+import { primaryColorLightOpacity } from '../common/constants'
+import { useAuthContext } from '../context/AuthContext'
+import * as Keychain from 'react-native-keychain'
+import { useAxiosContext } from '../context/AxiosContext'
 
-export default function Login() {
+export const Login = () => {
   const [passwordSecure, setPasswordSecure] = useState(true)
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const { setToken, setCurrentUser } = useAuthContext()
+  const { userAxios } = useAxiosContext()
+
+  const onLogin = async () => {
+    try {
+      const response = await userAxios.post('/users/client/login', {
+        email,
+        password,
+      })
+
+      const { accessToken, refreshToken, user } = response.data
+
+      setToken({
+        accessToken: jwt.accessToken,
+        refreshToken: jwt.refreshToken,
+      })
+
+      setCurrentUser(user)
+
+      await Keychain.setGenericPassword(
+        'token',
+        JSON.stringify({
+          accessToken,
+          refreshToken,
+        })
+      )
+    } catch (error) {
+      console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
+      Alert.alert('Login', error?.response?.data?.message)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -74,29 +110,7 @@ export default function Login() {
           activeOpacity={0.6}
           underlayColor='rgba(34, 163, 159, 0.6)'
           style={styles.loginBtn}
-          onPress={() => {
-            console.log(email)
-            console.log(password)
-
-            axios
-              .post(
-                'https://user-service-prod-pbl6-4jcro6.mo1.mogenius.io/api/v1/users/client/login',
-                // 'http://192.168.20.44:3000/api/v1/users/login',
-                {
-                  email,
-                  password,
-                }
-              )
-              .then((res) => {
-                // TODO: add token
-                console.log(res.data)
-                // navigate to main
-                RootNavigation.navigate('main')
-              })
-              .catch((err) => {
-                console.log(err)
-              })
-          }}
+          onPress={() => onLogin()}
         >
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableHighlight>
@@ -179,7 +193,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    backgroundColor: 'rgba(34, 163, 159, 0.8)',
+    backgroundColor: primaryColorLightOpacity,
     width: '100%',
     alignItems: 'center',
   },

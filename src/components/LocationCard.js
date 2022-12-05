@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
-import { Card, Title, Paragraph, Text, View } from 'react-native-paper'
+import { Card, Title, Paragraph, Text } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const LocationCard = ({ data }) => {
+export default function LocationCard({ data }) {
   const { name, address, imgUrl } = data
 
   return (
@@ -62,5 +62,3 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif',
   },
 })
-
-export default LocationCard

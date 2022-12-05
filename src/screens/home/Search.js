@@ -7,7 +7,7 @@ export default function Search(props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      {/* <Text style={styles.title}>{title}</Text> */}
       <View style={styles.inputContainer}>
         <Icon name="search" color="#1a303d" size={20} />
         <View style={styles.inputWrapper}>

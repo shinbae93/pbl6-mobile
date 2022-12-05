@@ -18,8 +18,11 @@ export default function Location() {
 
   async function fetchLocations() {
     axios
-      .get('https://shibabooking.herokuapp.com/api/booking/locations/all')
+      .get(
+        'https://pbl6-prod-pbl-dspnq9.mo6.mogenius.io/api/booking/locations/all'
+      )
       .then((res) => {
+        console.log('🚀 ~ file: Location.js:25 ~ .then ~ res', res.headers)
         console.log('🚀 ~ file: Location.js ~ line 22 ~ .then ~ res', res.data)
         setLocations(res.data)
       })
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
     // height: 100,
     // width: '80%',
     // alignItems: 'center',
+    marginBottom: 10,
   },
   list: {
     marginBottom: 100,

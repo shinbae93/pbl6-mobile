@@ -1,12 +1,11 @@
 import React from 'react'
 import { View, StyleSheet, Dimensions, SafeAreaView } from 'react-native'
-import TopBar from './home/TopBar'
 import Search from './home/Search'
 import Background from '../components/Background'
 import Locations from './home/locations/index'
-import * as RootNavigation from '../utils/RootNavigation'
+// import * as RootNavigation from '../utils/RootNavigation'
 
-const { height } = Dimensions.get('screen')
+// const { height } = Dimensions.get('screen')
 
 const bookings = [
   {
@@ -52,11 +51,11 @@ export default function Home() {
       <View style={styles.homeHeader}>
         <Background image={require('../../assets/home/header-bg.png')} />
         <View style={styles.headerWrapper}>
-          <TopBar
+          {/* <TopBar
             menuIcon='bars'
             profileImage={require('../../assets/home/avatar.png')}
             profileAction={() => RootNavigation.pop()}
-          />
+          /> */}
           <Search
             title='Search your desire space'
             inputPlaceholder='Search the house, room, etc'
@@ -70,7 +69,7 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   homeHeader: {
-    height: height / 2,
+    height: 60,
   },
   headerWrapper: {
     zIndex: 1,
