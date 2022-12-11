@@ -53,12 +53,14 @@ export const AxiosProvider = ({ children }) => {
       })
 
       await Keychain.setGenericPassword(
-        'token',
-        JSON.stringify({
-          accessToken: tokenRefreshResponse.data.accessToken,
-          refreshToken: authContext.authState.refreshToken,
-        })
+        'accessToken',
+        tokenRefreshResponse.data.accessToken
       )
+      await Keychain.setGenericPassword(
+        'refreshToken',
+        authContext.authState.refreshToken
+      )
+
       return await Promise.resolve()
     } catch (e) {
       authContext.setAuthState({

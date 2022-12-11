@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { TabNavigator } from './TabNavigator'
 
 const Stack = createNativeStackNavigator()
 
@@ -43,7 +44,7 @@ export const AppStack = () => {
     >
       <Stack.Screen
         name='main'
-        component={Main}
+        component={TabNavigator}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -19,7 +19,7 @@ import {
 import { useAuthContext } from '../context/AuthContext'
 import { useAxiosContext } from '../context/AxiosContext'
 
-export const ForgotPassword = () => {
+export const VerifyCode = () => {
   const [passwordSecure, setPasswordSecure] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

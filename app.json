@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Hotel Booking App",
-    "slug": "HotelBookingAppUIRN",
+    "name": "Shiba Booking App",
+    "slug": "ShibaBookingApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,16 +17,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.shinbae.ShibaBookingApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png"
       },
-      "package": "com.naeemqaswar.HotelBookingAppUIRN"
+      "package": "com.shinbae.ShibaBookingApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7887f30d-e015-4d88-91d5-fbc9d84364f3"
+      }
     }
   }
 }

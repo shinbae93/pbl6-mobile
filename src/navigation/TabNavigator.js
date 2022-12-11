@@ -13,6 +13,7 @@ export function TabNavigator() {
       initialRouteName='home'
       tabBar={(props) => <TabBar {...props} />}
       sceneContainerStyle={{ backgroundColor: '#fff' }}
+      screenOptions={{ headerShown: false }}
     >
       <Tab.Screen name='home' component={Home} />
       <Tab.Screen name='locations' component={Location} />

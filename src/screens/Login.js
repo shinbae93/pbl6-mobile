@@ -12,9 +12,12 @@ import {
 } from 'react-native'
 import * as RootNavigation from '../navigation/RootNavigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { primaryColorLightOpacity } from '../common/constants'
-import { useAuthContext } from '../context/AuthContext'
+import {
+  primaryColorLightOpacity,
+  primaryUnderlayColor,
+} from '../common/constants'
 import * as Keychain from 'react-native-keychain'
+import { useAuthContext } from '../context/AuthContext'
 import { useAxiosContext } from '../context/AxiosContext'
 
 export const Login = () => {
@@ -26,45 +29,39 @@ export const Login = () => {
   const { userAxios } = useAxiosContext()
 
   const onLogin = async () => {
-    try {
-      const response = await userAxios.post('/users/client/login', {
-        email,
-        password,
-      })
+    // try {
+    const response = await userAxios.post('/users/client/login', {
+      email,
+      password,
+    })
 
-      const { accessToken, refreshToken, user } = response.data
+    const { accessToken, refreshToken, user } = response.data
 
-      setToken({
-        accessToken: jwt.accessToken,
-        refreshToken: jwt.refreshToken,
-      })
+    setToken({
+      accessToken,
+      refreshToken,
+    })
 
-      setCurrentUser(user)
+    setCurrentUser(user)
 
-      await Keychain.setGenericPassword(
-        'token',
-        JSON.stringify({
-          accessToken,
-          refreshToken,
-        })
-      )
-    } catch (error) {
-      console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
-      Alert.alert('Login', error?.response?.data?.message)
-    }
+    await Keychain.setGenericPassword('accessToken', accessToken, {})
+    // } catch (error) {
+    //   console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
+    //   Alert.alert('Login', 'Invalid username or password')
+    // }
   }
 
   return (
     <View style={styles.container}>
-      <Image
-        resizeMode='cover'
-        style={styles.backgroundImage}
-        blurRadius={2}
-        source={require('../../assets/login/background2.jpg')}
-      />
       <View style={styles.formContainer}>
+        {/* <Text style={styles.subtitle}>Easy To Find Your Place</Text> */}
+        <Image
+          resizeMode='contain'
+          style={styles.backgroundImage}
+          // blurRadius={1}
+          source={require('../../assets/login-background.png')}
+        />
         <Text style={styles.title}>Shiba Booking</Text>
-        <Text style={styles.subtitle}>Easy To Find Your Place</Text>
         <View style={styles.inputsContainer}>
           <View style={styles.inputGroup}>
             <Icon
@@ -108,11 +105,11 @@ export const Login = () => {
 
         <TouchableHighlight
           activeOpacity={0.6}
-          underlayColor='rgba(34, 163, 159, 0.6)'
+          underlayColor={primaryUnderlayColor}
           style={styles.loginBtn}
           onPress={() => onLogin()}
         >
-          <Text style={styles.loginText}>LOGIN</Text>
+          <Text style={styles.loginText}>Sign In</Text>
         </TouchableHighlight>
         <View style={styles.accountActions}>
           <TouchableOpacity
@@ -141,10 +138,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignContent: 'center',
-    backgroundColor: '#fff',
+    colors: { backdrop: 'rgba(255, 255, 255, 0.7)' },
   },
   backgroundImage: {
-    textAlign: 'right',
+    textAlign: 'center',
+    height: '20%',
   },
   formContainer: {
     flex: 1,
@@ -167,7 +165,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 13,
-    color: '#1a2f3b',
+    // color: '#1a2f3b',
     textAlign: 'center',
   },
   inputsContainer: {
@@ -182,8 +180,8 @@ const styles = StyleSheet.create({
   },
   accountActionText: {
     color: '#000',
-    fontSize: 13,
-    fontWeight: '400',
+    fontSize: 14,
+    fontWeight: '600',
     fontFamily: 'sans-serif',
   },
   loginBtn: {
@@ -199,8 +197,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: '#fff',
-    fontSize: 13,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '700',
     fontFamily: 'sans-serif',
   },
   inputGroup: {
