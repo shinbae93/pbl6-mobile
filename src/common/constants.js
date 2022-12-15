@@ -1,10 +1,14 @@
 // Color
 // export const primaryColorHex = '#22A39F'
 // export const primaryColorHex = '#B8E8FA'
-export const primaryColorHex = '#009EFF'
-export const primaryColor = 'rgba(0, 158, 255)'
-export const primaryUnderlayColor = 'rgba(0, 158, 255, 0.6)'
-export const primaryColorLightOpacity = 'rgba(0, 158, 255, 0.8)'
+// export const primaryColorHex = '#009EFF'
+// export const primaryColor = 'rgba(0, 158, 255)'
+// export const primaryUnderlayColor = 'rgba(0, 158, 255, 0.6)'
+// export const primaryColorLightOpacity = 'rgba(0, 158, 255, 0.8)'
+export const primaryColorHex = '#5F9DF7'
+export const primaryColor = 'rgba(95, 157, 247)'
+export const primaryUnderlayColor = 'rgba(95, 157, 247, 0.6)'
+export const primaryColorLightOpacity = 'rgba(95, 157, 247, 0.8)'
 
 // Api
 export const userBaseAPI =

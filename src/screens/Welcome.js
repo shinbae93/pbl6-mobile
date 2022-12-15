@@ -21,6 +21,7 @@ export function Welcome({ navigation }) {
           onPress={() => {
             navigation.navigate('login')
           }}
+          dark={true}
         >
           Sign In
         </Button>
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
   container: {},
   topImage: {
     height: '60%',
-    // width: '95%',
     marginTop: 15,
     borderRadius: 15,
     alignSelf: 'center',

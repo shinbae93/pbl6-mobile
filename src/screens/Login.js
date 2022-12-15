@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -12,10 +12,7 @@ import {
 } from 'react-native'
 import * as RootNavigation from '../navigation/RootNavigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import {
-  primaryColorLightOpacity,
-  primaryUnderlayColor,
-} from '../common/constants'
+import { primaryColorHex, primaryUnderlayColor } from '../common/constants'
 import * as Keychain from 'react-native-keychain'
 import { useAuthContext } from '../context/AuthContext'
 import { useAxiosContext } from '../context/AxiosContext'
@@ -29,26 +26,23 @@ export const Login = () => {
   const { userAxios } = useAxiosContext()
 
   const onLogin = async () => {
-    // try {
-    const response = await userAxios.post('/users/client/login', {
-      email,
-      password,
-    })
+    try {
+      const response = await userAxios.post('/users/client/login', {
+        email,
+        password,
+      })
 
-    const { accessToken, refreshToken, user } = response.data
+      const { token, user } = response.data
 
-    setToken({
-      accessToken,
-      refreshToken,
-    })
+      setToken(token)
 
-    setCurrentUser(user)
+      setCurrentUser(user)
 
-    await Keychain.setGenericPassword('accessToken', accessToken, {})
-    // } catch (error) {
-    //   console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
-    //   Alert.alert('Login', 'Invalid username or password')
-    // }
+      await Keychain.setGenericPassword('token', token)
+    } catch (error) {
+      console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
+      Alert.alert('Login', 'Invalid username or password')
+    }
   }
 
   return (
@@ -191,7 +185,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    backgroundColor: primaryColorLightOpacity,
+    backgroundColor: primaryColorHex,
     width: '100%',
     alignItems: 'center',
   },

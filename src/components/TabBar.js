@@ -5,7 +5,8 @@ import {
   TouchableWithoutFeedback,
   Animated,
 } from 'react-native'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { primaryColorHex } from '../common/constants'
 
 export default function TabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options
@@ -28,7 +29,7 @@ export default function TabBar({ state, descriptors, navigation }) {
 
   const _navIcon = (screen, isFocused) => {
     let _name
-    let _size = isFocused ? 17 : 29
+    let _size = isFocused ? 16 : 20
     let _color = isFocused ? '#fff' : '#1a303d'
     let _outlineName = !isFocused ? '-outline' : ''
 
@@ -36,23 +37,20 @@ export default function TabBar({ state, descriptors, navigation }) {
       case 'home':
         _name = 'home' + _outlineName
         break
-      case 'locations':
-        _name = 'map-marker' + _outlineName
-        break
       case 'bookings':
         _name = 'calendar' + _outlineName
         break
       case 'notifications':
-        _name = 'bell' + _outlineName
+        _name = 'notifications' + _outlineName
         break
       case 'settings':
-        _name = 'tune'
+        _name = 'settings' + _outlineName
         break
       default:
         break
     }
 
-    return <MaterialCommunityIcons name={_name} color={_color} size={_size} />
+    return <Icon name={_name} color={_color} size={_size} />
   }
 
   const _renderBtn = (isFocused, options, route) => {
@@ -112,14 +110,22 @@ const styles = StyleSheet.create({
   container: {
     // borderWidth: 1,
     flexDirection: 'row',
-    width: '100%',
+    width: '90%',
     alignSelf: 'center',
     position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#EEEEEE',
+    bottom: 10,
+    backgroundColor: '#fff',
     paddingHorizontal: 10,
     paddingVertical: 10,
-    // borderRadius: 50,
+    borderRadius: 50,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
   },
   navAction: {
     flex: 1,
@@ -127,7 +133,7 @@ const styles = StyleSheet.create({
   },
   navActionBtn: {
     // borderWidth: 1,
-    paddingHorizontal: 15,
+    paddingHorizontal: 26,
     justifyContent: 'center',
   },
   navActionBtnFocused: {
@@ -136,11 +142,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignContent: 'center',
-    backgroundColor: '#1a303d',
+    backgroundColor: '#5F9DF7',
     borderRadius: 30,
   },
   navActionText: {
+    // color: primaryColorHex,
     color: '#fff',
+    fontWeight: '700',
     fontSize: 16,
   },
 })

@@ -4,18 +4,17 @@ import * as Keychain from 'react-native-keychain'
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState({
-    accessToken: null,
-    refreshToken: null,
-  })
+  const [token, setToken] = useState(null)
   const [currentUser, setCurrentUser] = useState(null)
 
   const logout = async () => {
     await Keychain.resetGenericPassword()
-    setToken({
-      accessToken: null,
-      refreshToken: null,
-    })
+    setToken(null)
+  }
+
+  const getToken = async () => {
+    const token = token || (await token.getGenericPassword()).password
+    return token
   }
 
   return (
@@ -23,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         token,
         setToken,
+        getToken,
         currentUser,
         setCurrentUser,
         logout,

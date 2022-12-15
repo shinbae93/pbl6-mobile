@@ -16,6 +16,7 @@ import {
   primaryColorLightOpacity,
   primaryUnderlayColor,
 } from '../common/constants'
+// import * as SecureStore from 'expo-secure-store'
 import { useAuthContext } from '../context/AuthContext'
 import { useAxiosContext } from '../context/AxiosContext'
 
@@ -43,7 +44,8 @@ export const ForgotPassword = () => {
 
       setCurrentUser(user)
 
-      await Keychain.setGenericPassword('accessToken', accessToken)
+      // await SecureStore.setItemAsync('accessToken', accessToken)
+      // await SecureStore.setItemAsync('refreshToken', refreshToken)
     } catch (error) {
       console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
       Alert.alert('Login', 'Invalid username or password')
