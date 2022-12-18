@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 30,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
     color: '#1a303d',
   },
 })

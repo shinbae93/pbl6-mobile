@@ -13,8 +13,8 @@ import {
 import * as RootNavigation from '../navigation/RootNavigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import {
-  primaryColorLightOpacity,
-  primaryUnderlayColor,
+  PRIMARY_LIGHT_COLOR,
+  PRIMARY_UNDERLAY_COLOR,
 } from '../common/constants'
 import * as SecureStore from 'expo-secure-store'
 import { useAuthContext } from '../context/AuthContext'
@@ -26,11 +26,11 @@ export const VerifyCode = () => {
   const [password, setPassword] = useState('')
 
   const { setToken, setCurrentUser } = useAuthContext()
-  const { userAxios } = useAxiosContext()
+  const { Axios } = useAxiosContext()
 
   const onLogin = async () => {
     try {
-      const response = await userAxios.post('/users/client/login', {
+      const response = await Axios.post('/users/client/login', {
         email,
         password,
       })
@@ -106,7 +106,7 @@ export const VerifyCode = () => {
 
         <TouchableHighlight
           activeOpacity={0.6}
-          underlayColor={primaryUnderlayColor}
+          underlayColor={PRIMARY_UNDERLAY_COLOR}
           style={styles.loginBtn}
           onPress={() => onLogin()}
         >
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 38,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
     color: '#1a2f3b',
     textAlign: 'center',
     marginBottom: 5,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 14,
     fontWeight: '600',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
   },
   loginBtn: {
     paddingVertical: 15,
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    backgroundColor: primaryColorLightOpacity,
+    backgroundColor: PRIMARY_LIGHT_COLOR,
     width: '100%',
     alignItems: 'center',
   },
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     fontWeight: '700',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
   },
   inputGroup: {
     width: '100%',

@@ -9,11 +9,10 @@ export default function Home() {
   const [locations, setLocations] = useState([])
   const [query, setQuery] = useState('')
 
-  const { bookingAxios } = useAxiosContext()
+  const { Axios } = useAxiosContext()
 
   async function fetchLocations() {
-    bookingAxios
-      .get('/booking/locations/all')
+    Axios.get('/booking/locations/all')
       .then((res) => {
         console.log('🚀 ~ file: Location.js ~ line 22 ~ .then ~ res', res.data)
         setLocations(res.data)
@@ -59,7 +58,7 @@ export default function Home() {
         value={query}
         onChangeText={(text) => setQuery(text)}
         style={styles.search}
-        placeholder='Search the house, room, etc'
+        placeholder='Search by location name, address'
         underlineColor='#fff'
         activeUnderlineColor='#fff'
         placeholderTextColor='#ddd'

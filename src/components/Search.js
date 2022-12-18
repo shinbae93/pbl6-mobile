@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
     color: '#fff',
   },
   inputContainer: {

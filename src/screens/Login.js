@@ -10,24 +10,24 @@ import {
   TouchableWithoutFeedback,
   Alert,
 } from 'react-native'
-import * as RootNavigation from '../navigation/RootNavigation'
+// import * as navigation from '../navigation/navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { primaryColorHex, primaryUnderlayColor } from '../common/constants'
+import { PRIMARY_COLOR_HEX, PRIMARY_UNDERLAY_COLOR } from '../common/constants'
 import * as Keychain from 'react-native-keychain'
 import { useAuthContext } from '../context/AuthContext'
 import { useAxiosContext } from '../context/AxiosContext'
 
-export const Login = () => {
+export const Login = ({ navigation }) => {
   const [passwordSecure, setPasswordSecure] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const { setToken, setCurrentUser } = useAuthContext()
-  const { userAxios } = useAxiosContext()
+  const { Axios } = useAxiosContext()
 
   const onLogin = async () => {
     try {
-      const response = await userAxios.post('/users/client/login', {
+      const response = await Axios.post('/v1/users/client/login', {
         email,
         password,
       })
@@ -40,6 +40,7 @@ export const Login = () => {
 
       await Keychain.setGenericPassword('token', token)
     } catch (error) {
+      // navigation.navigate('home')
       console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
       Alert.alert('Login', 'Invalid username or password')
     }
@@ -48,11 +49,9 @@ export const Login = () => {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
-        {/* <Text style={styles.subtitle}>Easy To Find Your Place</Text> */}
         <Image
           resizeMode='contain'
           style={styles.backgroundImage}
-          // blurRadius={1}
           source={require('../../assets/login-background.png')}
         />
         <Text style={styles.title}>Shiba Booking</Text>
@@ -95,31 +94,36 @@ export const Login = () => {
               </View>
             </TouchableWithoutFeedback>
           </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('forgotpassword')
+            }}
+          >
+            <Text style={styles.forgotPassword}>Forgot password?</Text>
+          </TouchableOpacity>
         </View>
 
         <TouchableHighlight
           activeOpacity={0.6}
-          underlayColor={primaryUnderlayColor}
+          underlayColor={PRIMARY_UNDERLAY_COLOR}
           style={styles.loginBtn}
           onPress={() => onLogin()}
         >
           <Text style={styles.loginText}>Sign In</Text>
         </TouchableHighlight>
+
         <View style={styles.accountActions}>
-          <TouchableOpacity
-            onPress={() => {
-              RootNavigation.navigate('forgotpassword')
-            }}
-          >
-            <Text style={styles.accountActionText}>Forgot Password?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              RootNavigation.navigate('register')
-            }}
-          >
-            <Text style={styles.accountActionText}>Register Now?</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>
+            Don't have an account?{' '}
+            <Text
+              style={styles.register}
+              onPress={() => {
+                navigation.navigate('register')
+              }}
+            >
+              Register now
+            </Text>
+          </Text>
         </View>
       </View>
     </View>
@@ -129,7 +133,6 @@ export const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
     justifyContent: 'center',
     alignContent: 'center',
     colors: { backdrop: 'rgba(255, 255, 255, 0.7)' },
@@ -150,16 +153,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: '8%',
   },
   title: {
-    fontSize: 38,
+    fontSize: 34,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
     color: '#1a2f3b',
     textAlign: 'center',
-    marginBottom: 5,
   },
   subtitle: {
     fontSize: 13,
-    // color: '#1a2f3b',
     textAlign: 'center',
   },
   inputsContainer: {
@@ -172,20 +173,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-  accountActionText: {
-    color: '#000',
+  forgotPassword: {
+    marginTop: 8,
     fontSize: 14,
-    fontWeight: '600',
-    fontFamily: 'sans-serif',
+    fontWeight: '700',
+    fontFamily: 'Plus Jakarta Sans',
+    alignSelf: 'flex-end',
+    color: '#F16866',
+  },
+  register: {
+    fontSize: 14,
+    fontWeight: '700',
+    fontFamily: 'Plus Jakarta Sans',
+    color: PRIMARY_COLOR_HEX,
   },
   loginBtn: {
     paddingVertical: 15,
-    paddingHorizontal: 25,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    backgroundColor: primaryColorHex,
+    backgroundColor: PRIMARY_COLOR_HEX,
     width: '100%',
     alignItems: 'center',
   },
@@ -193,7 +201,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     fontWeight: '700',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
   },
   inputGroup: {
     width: '100%',
@@ -230,5 +238,8 @@ const styles = StyleSheet.create({
   endingAction: {
     paddingHorizontal: 10,
     paddingVertical: 5,
+  },
+  text: {
+    fontFamily: 'Plus Jakarta Sans',
   },
 })

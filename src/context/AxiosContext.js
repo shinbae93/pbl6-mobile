@@ -1,22 +1,18 @@
 import React, { createContext, useContext } from 'react'
 import axios from 'axios'
 import { useAuthContext } from './AuthContext'
-import { bookingBaseAPI, userBaseAPI } from '../common/constants'
+import { BASE_API } from '../common/constants'
 
 export const AxiosContext = createContext()
 
 export const AxiosProvider = ({ children }) => {
   const { token } = useAuthContext()
 
-  const bookingAxios = axios.create({
-    baseURL: bookingBaseAPI,
+  const Axios = axios.create({
+    baseURL: BASE_API,
   })
 
-  const userAxios = axios.create({
-    baseURL: userBaseAPI,
-  })
-
-  bookingAxios.interceptors.request.use(
+  Axios.interceptors.request.use(
     (config) => {
       if (!config.headers.Authorization) {
         config.headers.Authorization = `Bearer ${token}`
@@ -32,8 +28,7 @@ export const AxiosProvider = ({ children }) => {
   return (
     <AxiosContext.Provider
       value={{
-        bookingAxios,
-        userAxios,
+        Axios,
       }}
     >
       {children}

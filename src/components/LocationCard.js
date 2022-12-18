@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
   cardTitleText: {
     // color: '#fff',
     fontSize: 18,
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
     fontWeight: 'bold',
   },
   cardTitleIcon: {
     margin: 20,
   },
   cardParagraph: {
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
     // color: '#fff',
   },
   cardParaIcon: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   cardParaText: {
     // color: '#fff',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Plus Jakarta Sans',
     color: '#65647C',
   },
 })

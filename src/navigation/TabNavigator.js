@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TabBar from '../components/TabBar'
-import Account from '../screens/Account'
+import Bookings from '../screens/Bookings'
 import Home from '../screens/Home'
+import Notifications from '../screens/Notifications'
 import Settings from '../screens/Settings'
 
 export function TabNavigator() {
@@ -12,12 +13,28 @@ export function TabNavigator() {
       initialRouteName='home'
       tabBar={(props) => <TabBar {...props} />}
       sceneContainerStyle={{ backgroundColor: '#fff' }}
-      screenOptions={{ headerShown: false }}
+      // screenOptions={{ headerShown: false }}
     >
-      <Tab.Screen name='home' component={Home} />
-      <Tab.Screen name='bookings' component={Account} />
-      <Tab.Screen name='notifications' component={Account} />
-      <Tab.Screen name='settings' component={Settings} />
+      <Tab.Screen
+        name='home'
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name='bookings'
+        component={Bookings}
+        options={{ headerTitle: 'Bookings', headerTitleAlign: 'center' }}
+      />
+      <Tab.Screen
+        name='notifications'
+        component={Notifications}
+        options={{ headerTitle: 'Notifications', headerTitleAlign: 'center' }}
+      />
+      <Tab.Screen
+        name='settings'
+        component={Settings}
+        options={{ headerTitle: 'Settings', headerTitleAlign: 'center' }}
+      />
     </Tab.Navigator>
   )
 }

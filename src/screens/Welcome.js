@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from 'react-native'
 import { Button, Text } from 'react-native-paper'
-import { primaryColorHex } from '../common/constants'
+import { PRIMARY_COLOR_HEX } from '../common/constants'
 
 export function Welcome({ navigation }) {
   return (
@@ -16,7 +16,7 @@ export function Welcome({ navigation }) {
         <Button
           style={styles.button}
           mode='contained'
-          color={primaryColorHex}
+          color={PRIMARY_COLOR_HEX}
           uppercase={false}
           onPress={() => {
             navigation.navigate('login')
@@ -28,7 +28,7 @@ export function Welcome({ navigation }) {
         <Button
           style={styles.button}
           mode='outlined'
-          color={primaryColorHex}
+          color={PRIMARY_COLOR_HEX}
           uppercase={false}
           onPress={() => {
             navigation.navigate('register')

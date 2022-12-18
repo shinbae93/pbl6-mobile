@@ -6,7 +6,7 @@ import {
   Animated,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { primaryColorHex } from '../common/constants'
+import { PRIMARY_COLOR_HEX } from '../common/constants'
 
 export default function TabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   navActionText: {
-    // color: primaryColorHex,
+    // color: PRIMARY_COLOR_HEX,
     color: '#fff',
     fontWeight: '700',
     fontSize: 16,

@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 import { ActivityIndicator } from 'react-native-paper'
-import { primaryColorHex } from '../common/constants'
+import { PRIMARY_COLOR_HEX } from '../common/constants'
 
 export default function Loading() {
   return (
     <ActivityIndicator
       animating={true}
-      color={primaryColorHex}
+      color={PRIMARY_COLOR_HEX}
       size='large'
       style={styles.loading}
     />

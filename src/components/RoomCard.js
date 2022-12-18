@@ -1,57 +1,79 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import { List, Surface } from 'react-native-paper'
+import { Image, StyleSheet, View } from 'react-native'
+import { List, Text, Surface, Button } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { navigate } from '../navigation/RootNavigation'
-import moment from 'moment'
+import { baseStyles } from '../common/baseStyles'
+import { FormatDatetime } from '../utilities/datetime'
+import LineDivider from './Divider'
+import { PRIMARY_COLOR_HEX } from '../common/constants'
 
 export default function RoomCard({ data }) {
   const { id, name, imgUrl, capacity, price, availableDay } = data
 
   return (
-    <Surface style={styles.container}>
+    <Surface style={styles.container} key={id}>
       <List.Item
-        style={styles.card}
-        title={() => <Text style={styles.title}>{name}</Text>}
-        description={() => (
-          <View>
-            <Text>
-              <View style={styles.icon}>
-                <Icon
-                  name='person-outline'
-                  style={styles.cardIcon}
-                  resizeMode='contain'
-                />
+        title={() => (
+          <List.Item
+            style={styles.card}
+            title={() => <Text style={styles.title}>{name}</Text>}
+            description={() => (
+              <View>
+                <View>
+                  <Text>
+                    <View style={styles.icon}>
+                      <FontAwesome5Icon
+                        name='dollar-sign'
+                        resizeMode='contain'
+                        style={styles.iconItem}
+                      />
+                    </View>
+                    <Text style={baseStyles.text}> Price:</Text>
+                    <Text style={baseStyles.text}> {price}</Text>
+                    <Text style={baseStyles.text}> VND/month</Text>
+                  </Text>
+                  <Text>
+                    <View style={styles.icon}>
+                      <Icon
+                        name='person-outline'
+                        style={styles.iconItem}
+                        resizeMode='contain'
+                      />
+                    </View>
+                    <Text style={baseStyles.text}>Capacity: </Text>
+                    <Text style={baseStyles.text}>{`${capacity} ${
+                      capacity >= 2 ? 'people' : 'person'
+                    }`}</Text>
+                  </Text>
+                  <Text>
+                    <View style={styles.icon}>
+                      <Icon
+                        name='today-sharp'
+                        style={styles.iconItem}
+                        resizeMode='contain'
+                      />
+                    </View>
+                    <Text style={baseStyles.text}>
+                      Available from: {FormatDatetime(availableDay)}
+                    </Text>
+                  </Text>
+                  <LineDivider />
+                  <Button mode='contained' style={styles.button}>
+                    Rent now
+                  </Button>
+                </View>
               </View>
-              <Text>{`${capacity} ${capacity > 2 ? 'people' : 'person'}`}</Text>
-            </Text>
-            <Text>
-              <Text style={styles.price}>$ {price} VND</Text>
-              <Text>/month</Text>
-            </Text>
-            <Text>
-              <Icon
-                name='today-sharp'
-                style={styles.cardIcon}
-                resizeMode='contain'
+            )}
+            left={() => (
+              <Image
+                source={{ uri: imgUrl }}
+                resizeMode='cover'
+                style={styles.image}
               />
-              <Text>
-                Available from: {moment(availableDay).format('DD/MM/YYYY')}
-              </Text>
-            </Text>
-          </View>
-        )}
-        left={() => (
-          <Image
-            source={{ uri: imgUrl }}
-            resizeMode='cover'
-            style={styles.image}
+            )}
           />
         )}
-        onPress={() => {
-          navigate('room-detail', {
-            id,
-          })
-        }}
       />
     </Surface>
   )
@@ -76,20 +98,27 @@ const styles = StyleSheet.create({
   card: {},
   icon: {
     paddingRight: 5,
+    alignSelf: 'baseline',
+  },
+  iconItem: {
+    color: '#34383D',
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 150,
     borderRadius: 12,
     marginRight: 15,
-    marginLeft: 2,
-    marginVertical: 5,
   },
   title: {
     fontSize: 18,
     fontWeight: '700',
+    fontFamily: 'Plus Jakarta Sans',
   },
   price: {
     fontWeight: '700',
+  },
+  button: {
+    marginTop: 10,
+    backgroundColor: PRIMARY_COLOR_HEX,
   },
 })
