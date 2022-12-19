@@ -1,17 +1,21 @@
 import React from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import { Avatar } from 'react-native-paper'
-import Placeholder from '../components/Placeholder'
 
 export default function Settings() {
   return (
-    <>
-      {/* <Avatar.Image size={24} source={require('../assets/avatar.png')} /> */}
-      <Placeholder
-        size={220}
-        title='ACCOUNT SETTINGS'
-        source={require('../../assets/demos/settings.png')}
-      />
-    </>
+    <ScrollView style={styles.container}>
+      <View style={styles.card}></View>
+      <View style={styles.card}></View>
+      <View style={styles.card}></View>
+      <View style={styles.card}></View>
+      <View style={styles.card}></View>
+    </ScrollView>
   )
 }
 
+const styles = StyleSheet.create({
+  container: {},
+  avatar: {},
+  card: {},
+})

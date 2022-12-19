@@ -40,12 +40,11 @@ export default function Bookings() {
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
       style={styles.list}
-      contentContainerStyle={{ paddingBottom: 15 }}
+      contentContainerStyle={{ paddingVertical: 15 }}
     />
   )
 }
 
 const styles = StyleSheet.create({
-  container: {},
   list: {},
 })

@@ -7,8 +7,11 @@ import {
   Title,
   Paragraph,
   Text,
+  Chip,
 } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { PRIMARY_COLOR_HEX } from '../common/constants'
+import { FormatDatetime } from '../utilities/datetime'
 import LineDivider from './Divider'
 
 export default function BookingCard({ data }) {
@@ -25,38 +28,36 @@ export default function BookingCard({ data }) {
 
   return (
     <Card style={styles.card} key={id}>
-      <Card.Cover source={{ uri: imgUrl }} />
+      <Card.Cover source={{ uri: imgUrl }} style={styles.coverImg} />
       <Card.Content>
         <Title>Booking #{id}</Title>
-        <Paragraph>Start day: {startDay}</Paragraph>
+        <Paragraph>Start: {FormatDatetime(startDay)}</Paragraph>
         <Paragraph>
           Duration: {monthNumber} {monthNumber >= 2 ? 'months' : 'month'}
         </Paragraph>
         <Paragraph>Room: {roomName}</Paragraph>
-        <Paragraph>Status: {status}</Paragraph>
+        <Text>
+          Status: <Text style={styles.status}>{status}</Text>
+        </Text>
         {overDueDay && <Paragraph>Overdue at: {overDueDay}</Paragraph>}
-        <Paragraph>
-          <LineDivider />
-        </Paragraph>
-        <Paragraph>
-          <View style={styles.utilities}>
-            <View style={styles.utilitiesTitle}>
-              <View style={styles.icon}>
-                <Icon name='md-list' resizeMode='contain' />
-              </View>
-              <Text style={styles.utilitiesTitleText}>Utilities</Text>
+        <LineDivider />
+        <View style={styles.utilities}>
+          <View style={styles.utilitiesTitle}>
+            <View style={styles.icon}>
+              <Icon name='md-list' resizeMode='contain' />
             </View>
-            <View style={styles.utilityList}>
-              {utilities?.map((utility, index) => (
-                <View key={index} style={styles.utilityItem}>
-                  <Text
-                    style={[styles.text, styles.infoText]}
-                  >{`${utility?.name}: ${utility?.price} VND`}</Text>
-                </View>
-              ))}
-            </View>
+            <Text style={styles.utilitiesTitleText}>Utilities</Text>
           </View>
-        </Paragraph>
+          <View style={styles.utilityList}>
+            {utilities?.map((utility, index) => (
+              <View key={index} style={styles.utilityItem}>
+                <Text
+                  style={[styles.text, styles.infoText]}
+                >{`${utility?.name}: ${utility?.price} VND`}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
       </Card.Content>
     </Card>
   )
@@ -74,7 +75,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2.84,
     elevation: 4,
-    borderRadius: 15,
+    borderRadius: 10,
+  },
+  coverImg: {
+    borderRadius: 10,
+    margin: 10,
   },
   utilities: {
     marginTop: 15,
@@ -84,7 +89,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   utilitiesTitleText: {
-    fontWeight: '700',
+    fontSize: 16,
+    fontFamily: 'Plus Jakarta Sans',
   },
   utilityList: {
     flex: 1,
@@ -94,5 +100,17 @@ const styles = StyleSheet.create({
   utilityItem: {
     flexBasis: '50%',
     marginVertical: 3,
+  },
+  icon: {
+    marginTop: 3,
+    paddingRight: 5,
+  },
+  statusChip: {},
+  status: {
+    padding: 15,
+    backgroundColor: PRIMARY_COLOR_HEX,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    color: '#fff',
   },
 })
