@@ -10,9 +10,10 @@ import {
   Chip,
 } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { PRIMARY_COLOR_HEX } from '../common/constants'
+import { BOOKING_STATUS_COLORS, PRIMARY_COLOR_HEX } from '../common/constants'
 import { FormatDatetime } from '../utilities/datetime'
-import LineDivider from './Divider'
+import { ToWords } from '../utilities/string'
+import LineDivider from './LineDivider'
 
 export default function BookingCard({ data }) {
   const {
@@ -37,7 +38,15 @@ export default function BookingCard({ data }) {
         </Paragraph>
         <Paragraph>Room: {roomName}</Paragraph>
         <Text>
-          Status: <Text style={styles.status}>{status}</Text>
+          Status:{' '}
+          <Text
+            style={[
+              styles.status,
+              { backgroundColor: BOOKING_STATUS_COLORS[status] },
+            ]}
+          >
+            {status}
+          </Text>
         </Text>
         {overDueDay && <Paragraph>Overdue at: {overDueDay}</Paragraph>}
         <LineDivider />
@@ -108,7 +117,6 @@ const styles = StyleSheet.create({
   statusChip: {},
   status: {
     padding: 15,
-    backgroundColor: PRIMARY_COLOR_HEX,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     color: '#fff',

@@ -110,14 +110,14 @@ const styles = StyleSheet.create({
   container: {
     // borderWidth: 1,
     flexDirection: 'row',
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
     position: 'absolute',
-    bottom: 10,
+    bottom: 0,
     backgroundColor: '#fff',
     paddingHorizontal: 10,
     paddingVertical: 10,
-    borderRadius: 50,
+    // borderRadius: 50,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   navActionBtn: {
     // borderWidth: 1,
-    paddingHorizontal: 26,
+    paddingHorizontal: 30,
     justifyContent: 'center',
   },
   navActionBtnFocused: {

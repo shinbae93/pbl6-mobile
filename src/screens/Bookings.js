@@ -40,7 +40,8 @@ export default function Bookings() {
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
       style={styles.list}
-      contentContainerStyle={{ paddingVertical: 15 }}
+      contentContainerStyle={{ paddingTop: 15, paddingBottom: 80 }}
+      showsVerticalScrollIndicator={false}
     />
   )
 }

@@ -7,6 +7,16 @@ export const ERROR_COLOR_HEX = '#F74360'
 export const SUCCESS_COLOR_HEX = '#3AB500'
 export const WARNING_COLOR_HEX = '#FCE0A2'
 
+export const BOOKING_STATUS_COLORS = {
+  Approved: '#4ade80',
+  Pending: '#facc15',
+  Reject: '#f87171',
+  Success: '#c084fc',
+  OverDuePayment: '#f472b6',
+  ExtendDueBooking: '#fb923c',
+  Done: '#000000',
+}
+
 // API
 export const USER_BASE_API =
   'https://user-service-prod-pbl6-4jcro6.mo1.mogenius.io/api/v1'

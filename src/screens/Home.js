@@ -70,6 +70,7 @@ export default function Home() {
         keyExtractor={(item) => item.id}
         style={styles.list}
         contentContainerStyle={{ paddingBottom: 150 }}
+        showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   )

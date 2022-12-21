@@ -5,7 +5,7 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { navigate } from '../navigation/RootNavigation'
 import { baseStyles } from '../common/baseStyles'
 import { FormatDatetime } from '../utilities/datetime'
-import LineDivider from './Divider'
+import LineDivider from './LineDivider'
 import { PRIMARY_COLOR_HEX } from '../common/constants'
 
 export default function RoomCard({ data }) {

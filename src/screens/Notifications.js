@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Alert, FlatList, StyleSheet, View } from 'react-native'
-import LineDivider from '../components/Divider'
+import LineDivider from '../components/LineDivider'
 import NotificationCard from '../components/NotificationCard'
 import { useAxiosContext } from '../context/AxiosContext'
 
@@ -42,7 +42,8 @@ export default function Notifications() {
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
       style={styles.list}
-      contentContainerStyle={{ paddingBottom: 15 }}
+      contentContainerStyle={{ paddingBottom: 80 }}
+      showsVerticalScrollIndicator={false}
     />
   )
 }

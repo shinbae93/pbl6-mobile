@@ -7,12 +7,12 @@ import {
   StyleSheet,
   View,
 } from 'react-native'
-import { Divider, Text } from 'react-native-paper'
+import { Text } from 'react-native-paper'
 import { PRIMARY_COLOR_HEX } from '../common/constants'
 import RoomCard from '../components/RoomCard'
 import { useAxiosContext } from '../context/AxiosContext'
 import Icon from 'react-native-vector-icons/Ionicons'
-import LineDivider from '../components/Divider'
+import LineDivider from '../components/LineDivider'
 
 export default function LocationDetail({ route }) {
   const { id } = route.params
@@ -39,11 +39,8 @@ export default function LocationDetail({ route }) {
   async function fetchRooms() {
     Axios.post(`booking/locations/${id}/rooms/all`, {})
       .then((res) => {
-        console.log(
-          '🚀 ~ file: LocationDetail.js:42 ~ .then ~ res',
-          res.data.response
-        )
-        setRooms(res.data.response)
+        console.log('🚀 ~ file: LocationDetail.js:42 ~ .then ~ res', res.data)
+        setRooms(res.data)
       })
       .catch((err) => {
         console.log('🚀 ~ file: Location.js ~ line 23 ~ fetchRooms ~ err', err)
@@ -68,7 +65,7 @@ export default function LocationDetail({ route }) {
         keyExtractor={(item) => item.id}
         style={styles.list}
         contentContainerStyle={{ paddingVertical: 10 }}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => (
           <View style={styles.locationCard}>
             <Image
