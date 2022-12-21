@@ -49,7 +49,9 @@ export default function Settings() {
             <TouchableOpacity>
               <List.Item
                 title='Language'
-                left={() => <Ionicons name='language' style={styles.icon} />}
+                left={() => (
+                  <Ionicons name='language' style={styles.icon} size={18} />
+                )}
                 right={() => (
                   <View
                     style={{
@@ -74,7 +76,11 @@ export default function Settings() {
               <List.Item
                 title='Notification'
                 left={() => (
-                  <Ionicons name='notifications-outline' style={styles.icon} />
+                  <Ionicons
+                    name='notifications-outline'
+                    style={styles.icon}
+                    size={18}
+                  />
                 )}
                 right={() => (
                   <Switch
@@ -89,7 +95,41 @@ export default function Settings() {
               <List.Item
                 title='Introduction'
                 left={() => (
-                  <Ionicons name='book-outline' style={styles.icon} />
+                  <Ionicons name='book-outline' style={styles.icon} size={18} />
+                )}
+                right={() => (
+                  <View style={{ justifyContent: 'center' }}>
+                    <AntDesignIcon name='right' size={18} />
+                  </View>
+                )}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <List.Item
+                title='FAQ'
+                left={() => (
+                  <MaterialIcons
+                    name='contact-support'
+                    style={styles.icon}
+                    size={18}
+                  />
+                )}
+                right={() => (
+                  <View style={{ justifyContent: 'center' }}>
+                    <AntDesignIcon name='right' size={18} />
+                  </View>
+                )}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <List.Item
+                title='Help'
+                left={() => (
+                  <Ionicons
+                    name='help-circle-outline'
+                    style={styles.icon}
+                    size={18}
+                  />
                 )}
                 right={() => (
                   <View style={{ justifyContent: 'center' }}>
@@ -109,7 +149,11 @@ export default function Settings() {
               <List.Item
                 title='Privacy policy'
                 left={() => (
-                  <MaterialIcons name='lock-outline' style={styles.icon} />
+                  <MaterialIcons
+                    name='lock-outline'
+                    style={styles.icon}
+                    size={18}
+                  />
                 )}
                 right={() => (
                   <View style={{ justifyContent: 'center' }}>
@@ -122,7 +166,11 @@ export default function Settings() {
               <List.Item
                 title='Terms & Conditions'
                 left={() => (
-                  <Ionicons name='clipboard-outline' style={styles.icon} />
+                  <Ionicons
+                    name='clipboard-outline'
+                    style={styles.icon}
+                    size={18}
+                  />
                 )}
                 right={() => (
                   <View style={{ justifyContent: 'center' }}>
@@ -153,7 +201,6 @@ const styles = StyleSheet.create({
     height: '100%',
     marginBottom: 63,
   },
-  avatar: {},
   card: {
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
