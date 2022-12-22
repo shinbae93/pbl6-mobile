@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
-import {
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native'
-import { Avatar, List, Paragraph, Switch, Text } from 'react-native-paper'
+import { ScrollView, StyleSheet, TouchableRipple, View } from 'react-native'
+import { Avatar, List, Switch, Text } from 'react-native-paper'
 import { useAuthContext } from '../context/AuthContext'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -22,7 +16,7 @@ export default function Settings() {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {currentUser && (
-        <TouchableOpacity style={styles.card}>
+        <TouchableRipple style={styles.card}>
           <List.Item
             title={currentUser.fullName}
             left={() => (
@@ -40,13 +34,13 @@ export default function Settings() {
               fontFamily: 'Plus Jakarta Sans',
             }}
           />
-        </TouchableOpacity>
+        </TouchableRipple>
       )}
       <View style={styles.card}>
         <List.Section>
           <List.Subheader style={styles.title}>About</List.Subheader>
           <View style={styles.listItem}>
-            <TouchableOpacity>
+            <TouchableRipple>
               <List.Item
                 title='Language'
                 left={() => (
@@ -71,8 +65,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableOpacity>
-            <TouchableOpacity>
+            </TouchableRipple>
+            <TouchableRipple>
               <List.Item
                 title='Notification'
                 left={() => (
@@ -90,8 +84,8 @@ export default function Settings() {
                   />
                 )}
               />
-            </TouchableOpacity>
-            <TouchableOpacity>
+            </TouchableRipple>
+            <TouchableRipple>
               <List.Item
                 title='Introduction'
                 left={() => (
@@ -103,8 +97,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableOpacity>
-            <TouchableOpacity>
+            </TouchableRipple>
+            <TouchableRipple>
               <List.Item
                 title='FAQ'
                 left={() => (
@@ -120,8 +114,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableOpacity>
-            <TouchableOpacity>
+            </TouchableRipple>
+            <TouchableRipple>
               <List.Item
                 title='Help'
                 left={() => (
@@ -137,7 +131,7 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableOpacity>
+            </TouchableRipple>
           </View>
         </List.Section>
       </View>
@@ -145,7 +139,7 @@ export default function Settings() {
         <List.Section>
           <List.Subheader style={styles.title}>Security</List.Subheader>
           <View style={styles.listItem}>
-            <TouchableOpacity>
+            <TouchableRipple>
               <List.Item
                 title='Privacy policy'
                 left={() => (
@@ -161,8 +155,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableOpacity>
-            <TouchableOpacity>
+            </TouchableRipple>
+            <TouchableRipple>
               <List.Item
                 title='Terms & Conditions'
                 left={() => (
@@ -178,11 +172,11 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableOpacity>
+            </TouchableRipple>
           </View>
         </List.Section>
       </View>
-      <TouchableOpacity style={styles.card}>
+      <TouchableRipple style={styles.card}>
         <List.Item
           title='Log out'
           right={() => (
@@ -191,7 +185,7 @@ export default function Settings() {
             </View>
           )}
         />
-      </TouchableOpacity>
+      </TouchableRipple>
     </ScrollView>
   )
 }

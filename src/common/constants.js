@@ -6,6 +6,7 @@ export const PRIMARY_LIGHT_COLOR = 'rgba(95, 157, 247, 0.8)'
 export const ERROR_COLOR_HEX = '#F74360'
 export const SUCCESS_COLOR_HEX = '#3AB500'
 export const WARNING_COLOR_HEX = '#FCE0A2'
+export const SILVER_COLOR_HEX = '#797875'
 
 export const BOOKING_STATUS_COLORS = {
   Approved: '#4ade80',
