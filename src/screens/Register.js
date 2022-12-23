@@ -18,16 +18,10 @@ import {
   SILVER_COLOR_HEX,
 } from '../common/constants'
 import { useAxiosContext } from '../context/AxiosContext'
-import {
-  Headline,
-  Modal,
-  Paragraph,
-  Portal,
-  Provider,
-  Title,
-} from 'react-native-paper'
+import { Paragraph, Provider, Title } from 'react-native-paper'
+import DropDownPicker from 'react-native-dropdown-picker'
 
-export const Register = () => {
+export const Register = ({ navigation }) => {
   const [passwordSecure, setPasswordSecure] = useState(true)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -35,7 +29,19 @@ export const Register = () => {
   const [gender, setGender] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isShowModel, setIsShowModel] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [items, setItems] = useState([
+    {
+      label: 'Male',
+      value: true,
+      icon: () => <Icon name='male' size={18} />,
+    },
+    {
+      label: 'Female',
+      value: false,
+      icon: () => <Icon name='female' size={18} />,
+    },
+  ])
 
   const { Axios } = useAxiosContext()
 
@@ -59,23 +65,14 @@ export const Register = () => {
   return (
     <Provider>
       <View style={styles.container}>
-        <Portal>
-          <Modal
-            visible={isShowModel}
-            onDismiss={() => {
-              setIsShowModel(false)
-            }}
-            style={styles.modal}
-          >
-            <Text>Example Modal. Click outside this area to dismiss.</Text>
-          </Modal>
-        </Portal>
         <View style={styles.formContainer}>
           <View>
             <Title style={{ alignSelf: 'center', fontSize: 24 }}>
-              Create an account.
+              Create an account
             </Title>
-            <Paragraph style={{ fontSize: 14, color: '#797875' }}>
+            <Paragraph
+              style={{ fontSize: 14, color: '#797875', textAlign: 'center' }}
+            >
               Already a member?{' '}
               <Paragraph
                 style={{
@@ -84,7 +81,7 @@ export const Register = () => {
                   fontWeight: '700',
                 }}
                 onPress={() => {
-                  navigation.navigate('register')
+                  navigation.navigate('login')
                 }}
               >
                 Sign in
@@ -159,21 +156,49 @@ export const Register = () => {
                 />
               </View>
 
-              <TouchableOpacity style={[styles.inputGroup, { width: '48%' }]}>
-                <View style={styles.row}>
-                  <Text style={[styles.inputField, styles.inputEndingSpace]}>
-                    {gender || 'Gender'}
-                  </Text>
-                  <View style={{ marginLeft: 10, alignSelf: 'center' }}>
-                    <Icon
-                      name='chevron-down-sharp'
-                      style={[styles.inputIcon, styles.inputEndingIcon]}
-                      resizeMode='contain'
-                      onPress={() => setIsShowModel(true)}
-                    />
-                  </View>
-                </View>
-              </TouchableOpacity>
+              <DropDownPicker
+                placeholder='Select gender'
+                open={isOpen}
+                value={gender}
+                items={items}
+                setOpen={setIsOpen}
+                setValue={setGender}
+                setItems={setItems}
+                style={{
+                  borderWidth: 0,
+                  paddingVertical: 5,
+                }}
+                containerStyle={{
+                  zIndex: 9,
+                  width: '48%',
+                  marginLeft: 5,
+                  borderTopLeftRadius: 15,
+                  borderTopRightRadius: 15,
+                  borderBottomLeftRadius: 15,
+                  borderBottomRightRadius: 15,
+                  backgroundColor: '#fff',
+                  borderWidth: 0,
+                }}
+                textStyle={{
+                  color: SILVER_COLOR_HEX,
+                  textAlign: 'center',
+                }}
+                dropDownContainerStyle={{}}
+                selectedItemLabelStyle={{
+                  fontWeight: 'bold',
+                  color: PRIMARY_COLOR_HEX,
+                }}
+                listItemLabelStyle={{
+                  textAlign: 'left',
+                }}
+                itemSeparator={true}
+                itemSeparatorStyle={{
+                  height: 0.5,
+                  width: '90%',
+                  alignSelf: 'center',
+                }}
+                showTickIcon={true}
+              />
             </View>
 
             <View style={{ height: 15 }} />
@@ -248,10 +273,7 @@ export const Register = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignContent: 'center',
-    colors: { backdrop: 'rgba(255, 255, 255, 0.7)' },
-    marginTop: 25,
   },
   formContainer: {
     flex: 1,
@@ -328,7 +350,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Plus Jakarta Sans',
   },
   modal: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
+    marginHorizontal: '25%',
     padding: 20,
+    borderRadius: 15,
+    // marginVertical: '50%',
   },
 })

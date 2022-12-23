@@ -20,7 +20,7 @@ export const AuthStack = () => {
         component={Login}
         options={{
           headerShown: true,
-          headerTransparent: true,
+
           title: 'Sign In',
         }}
       />
@@ -29,7 +29,7 @@ export const AuthStack = () => {
         component={ForgotPassword}
         options={{
           headerShown: true,
-          headerTransparent: true,
+
           title: 'Forgot password',
         }}
       />
@@ -38,7 +38,7 @@ export const AuthStack = () => {
         component={Register}
         options={{
           headerShown: true,
-          headerTransparent: true,
+
           title: 'Register',
         }}
       />
