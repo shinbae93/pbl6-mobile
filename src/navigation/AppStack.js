@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import BookingDetail from '../screens/BookingDetail'
 import LocationDetail from '../screens/LocationDetail'
 import RoomDetail from '../screens/RoomDetail'
 import { TabNavigator } from './TabNavigator'
@@ -28,6 +29,15 @@ export const AppStack = () => {
         options={{
           headerShown: true,
           title: 'Room Detail',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name='booking-detail'
+        component={BookingDetail}
+        options={{
+          headerShown: true,
+          title: 'Booking Detail',
           headerTitleAlign: 'center',
         }}
       />

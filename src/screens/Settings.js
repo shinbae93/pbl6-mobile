@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
     elevation: 4,
     margin: 10,
     backgroundColor: '#fff',
+    paddingLeft: 10,
   },
   row: {
     flex: 1,
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   left: {
-    paddingLeft: 5,
+    // paddingLeft: 5,
     paddingRight: 15,
   },
   right: {

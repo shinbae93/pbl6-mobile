@@ -1,18 +1,10 @@
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
-import {
-  Avatar,
-  Button,
-  Card,
-  Title,
-  Paragraph,
-  Text,
-  Chip,
-} from 'react-native-paper'
+import { Card, Title, Paragraph, Text } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { BOOKING_STATUS_COLORS, PRIMARY_COLOR_HEX } from '../common/constants'
+import { BOOKING_STATUS_COLORS } from '../common/constants'
+import { navigate } from '../navigation/RootNavigation'
 import { FormatDatetime } from '../utilities/datetime'
-import { ToWords } from '../utilities/string'
 import LineDivider from './LineDivider'
 
 export default function BookingCard({ data }) {
@@ -28,7 +20,15 @@ export default function BookingCard({ data }) {
   } = data
 
   return (
-    <Card style={styles.card} key={id}>
+    <Card
+      style={styles.card}
+      key={id}
+      onPress={() => {
+        navigate('booking-detail', {
+          id,
+        })
+      }}
+    >
       <Card.Cover source={{ uri: imgUrl }} style={styles.coverImg} />
       <Card.Content>
         <Title>Booking #{id}</Title>
@@ -58,13 +58,15 @@ export default function BookingCard({ data }) {
             <Text style={styles.utilitiesTitleText}>Utilities</Text>
           </View>
           <View style={styles.utilityList}>
-            {utilities?.map((utility, index) => (
-              <View key={index} style={styles.utilityItem}>
-                <Text
-                  style={[styles.text, styles.infoText]}
-                >{`${utility?.name}: ${utility?.price} VND`}</Text>
-              </View>
-            ))}
+            {utilities?.map((utility, index) => {
+              return (
+                <View key={index} style={styles.utilityItem}>
+                  <Text
+                    style={[styles.text, styles.infoText]}
+                  >{`${utility?.name}: ${utility?.price} VND`}</Text>
+                </View>
+              )
+            })}
           </View>
         </View>
       </Card.Content>

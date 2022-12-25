@@ -29,9 +29,8 @@ export default function Notifications() {
 
   const renderItem = ({ item }) => {
     return (
-      <View>
+      <View style={{ marginVertical: 5 }}>
         <NotificationCard data={item} />
-        <LineDivider />
       </View>
     )
   }
