@@ -18,7 +18,7 @@ import {
   SILVER_COLOR_HEX,
 } from '../common/constants'
 import { useAxiosContext } from '../context/AxiosContext'
-import { Paragraph, Provider, Title } from 'react-native-paper'
+import { Caption, Paragraph, Provider, Title } from 'react-native-paper'
 import DropDownPicker from 'react-native-dropdown-picker'
 
 export const Register = ({ navigation }) => {
@@ -29,6 +29,7 @@ export const Register = ({ navigation }) => {
   const [gender, setGender] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmedPassword, setConfirmedPassword] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [items, setItems] = useState([
     {
@@ -117,7 +118,7 @@ export const Register = ({ navigation }) => {
                 <TextInput
                   placeholder='First Name'
                   style={[styles.inputField]}
-                  value={email}
+                  value={firstName}
                   onChangeText={(text) => setFirstName(text)}
                 />
               </View>
@@ -131,7 +132,7 @@ export const Register = ({ navigation }) => {
                 <TextInput
                   placeholder='Last Name'
                   style={[styles.inputField]}
-                  value={email}
+                  value={lastName}
                   onChangeText={(text) => setLastName(text)}
                 />
               </View>
@@ -143,15 +144,11 @@ export const Register = ({ navigation }) => {
               <View
                 style={[styles.inputGroup, { width: '48%', marginRight: 10 }]}
               >
-                <Icon
-                  name='person-outline'
-                  style={styles.inputIcon}
-                  resizeMode='contain'
-                />
+                <Caption style={{ marginRight: 15 }}>+84</Caption>
                 <TextInput
                   placeholder='Phone number'
                   style={[styles.inputField]}
-                  value={email}
+                  value={phone}
                   onChangeText={(text) => setPhone(text)}
                 />
               </View>
@@ -240,8 +237,8 @@ export const Register = ({ navigation }) => {
                 placeholder='Confirm Password'
                 secureTextEntry={passwordSecure}
                 style={[styles.inputField, styles.inputEndingSpace]}
-                value={password}
-                onChangeText={(text) => setPassword(text)}
+                value={confirmedPassword}
+                onChangeText={(text) => setConfirmedPassword(text)}
               />
               <TouchableWithoutFeedback>
                 <View>
@@ -326,7 +323,7 @@ const styles = StyleSheet.create({
     // color: '#fff',
   },
   inputField: {
-    color: 'SILVER_COLOR_HEX',
+    color: SILVER_COLOR_HEX,
     fontSize: 13,
     width: '90%',
   },
@@ -345,7 +342,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: '700',
     fontFamily: 'Plus Jakarta Sans',
   },

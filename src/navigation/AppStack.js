@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import LocationDetail from '../screens/LocationDetail'
+import RoomDetail from '../screens/RoomDetail'
 import { TabNavigator } from './TabNavigator'
 
 const Stack = createNativeStackNavigator()
@@ -18,6 +19,15 @@ export const AppStack = () => {
         options={{
           headerShown: true,
           title: 'Location Detail',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name='room-detail'
+        component={RoomDetail}
+        options={{
+          headerShown: true,
+          title: 'Room Detail',
           headerTitleAlign: 'center',
         }}
       />

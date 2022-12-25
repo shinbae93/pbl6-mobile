@@ -10,12 +10,12 @@ import {
   TouchableWithoutFeedback,
   Alert,
 } from 'react-native'
-// import * as navigation from '../navigation/navigation'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { PRIMARY_COLOR_HEX, PRIMARY_UNDERLAY_COLOR } from '../common/constants'
 import * as Keychain from 'react-native-keychain'
 import { useAuthContext } from '../context/AuthContext'
 import { useAxiosContext } from '../context/AxiosContext'
+import { navigate } from '../navigation/RootNavigation'
 
 export const Login = ({ navigation }) => {
   const [passwordSecure, setPasswordSecure] = useState(true)
@@ -40,7 +40,7 @@ export const Login = ({ navigation }) => {
 
       await Keychain.setGenericPassword('token', token)
     } catch (error) {
-      // navigation.navigate('home')
+      navigation.navigate('home')
       console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
       Alert.alert('Login', 'Invalid username or password')
     }
@@ -52,7 +52,7 @@ export const Login = ({ navigation }) => {
         <Image
           resizeMode='contain'
           style={styles.backgroundImage}
-          source={require('../../assets/login-background.png')}
+          source={require('../../assets/login-background3.png')}
         />
         <Text style={styles.title}>Shiba Booking</Text>
         <View style={styles.inputsContainer}>
@@ -135,11 +135,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
-    colors: { backdrop: 'rgba(255, 255, 255, 0.7)' },
+    backgroundColor: '#fff',
   },
   backgroundImage: {
     textAlign: 'center',
-    height: '20%',
+    height: '28%',
+    width: '100%',
   },
   formContainer: {
     flex: 1,
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
     color: PRIMARY_COLOR_HEX,
   },
   loginBtn: {
-    paddingVertical: 15,
+    paddingVertical: 13,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,

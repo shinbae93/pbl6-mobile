@@ -74,6 +74,11 @@ export default function RoomCard({ data }) {
             )}
           />
         )}
+        onPress={() =>
+          navigate('room-detail', {
+            id,
+          })
+        }
       />
     </Surface>
   )
@@ -94,6 +99,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 0.62,
     elevation: 2,
+    backgroundColor: '#fff',
   },
   card: {},
   icon: {

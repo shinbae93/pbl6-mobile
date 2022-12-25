@@ -16,7 +16,7 @@ export function Welcome({ navigation }) {
         <Button
           style={styles.button}
           mode='contained'
-          color={PRIMARY_COLOR_HEX}
+          buttonColor={PRIMARY_COLOR_HEX}
           uppercase={false}
           onPress={() => {
             navigation.navigate('login')
@@ -28,7 +28,7 @@ export function Welcome({ navigation }) {
         <Button
           style={styles.button}
           mode='outlined'
-          color={PRIMARY_COLOR_HEX}
+          textColor={PRIMARY_COLOR_HEX}
           uppercase={false}
           onPress={() => {
             navigation.navigate('register')
@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: '80%',
     marginVertical: 10,
-    borderWidth: 1,
     fontSize: 16,
     fontWeight: 700,
   },

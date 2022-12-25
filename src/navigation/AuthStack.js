@@ -4,6 +4,7 @@ import { Login } from '../screens/Login'
 import { ForgotPassword } from '../screens/ForgotPassword'
 import { Register } from '../screens/Register'
 import { Welcome } from '../screens/Welcome'
+import OTP from '../screens/OTP'
 
 const Stack = createNativeStackNavigator()
 
@@ -20,7 +21,6 @@ export const AuthStack = () => {
         component={Login}
         options={{
           headerShown: true,
-
           title: 'Sign In',
         }}
       />
@@ -29,8 +29,24 @@ export const AuthStack = () => {
         component={ForgotPassword}
         options={{
           headerShown: true,
-
-          title: 'Forgot password',
+          title: 'Forgot Password',
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name='resetpassword'
+        component={ForgotPassword}
+        options={{
+          headerShown: false,
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name='otp'
+        component={OTP}
+        options={{
+          headerShown: true,
+          title: 'OTP',
         }}
       />
       <Stack.Screen
@@ -38,7 +54,6 @@ export const AuthStack = () => {
         component={Register}
         options={{
           headerShown: true,
-
           title: 'Register',
         }}
       />

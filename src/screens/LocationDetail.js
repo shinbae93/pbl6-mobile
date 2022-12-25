@@ -40,7 +40,7 @@ export default function LocationDetail({ route }) {
     Axios.post(`booking/locations/${id}/rooms/all`, {})
       .then((res) => {
         console.log('🚀 ~ file: LocationDetail.js:42 ~ .then ~ res', res.data)
-        setRooms(res.data)
+        setRooms(res.data.response)
       })
       .catch((err) => {
         console.log('🚀 ~ file: Location.js ~ line 23 ~ fetchRooms ~ err', err)

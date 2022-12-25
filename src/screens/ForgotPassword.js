@@ -1,134 +1,72 @@
-import React, { useContext, useState } from 'react'
+import { useState } from 'react'
 import {
   View,
-  Text,
   Image,
   StyleSheet,
-  TouchableOpacity,
   TouchableHighlight,
+  Text,
   TextInput,
-  TouchableWithoutFeedback,
-  Alert,
 } from 'react-native'
-import * as RootNavigation from '../navigation/RootNavigation'
+import { Caption, HelperText, Title } from 'react-native-paper'
+import { PRIMARY_COLOR_HEX, PRIMARY_UNDERLAY_COLOR } from '../common/constants'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import {
-  PRIMARY_LIGHT_COLOR,
-  PRIMARY_UNDERLAY_COLOR,
-} from '../common/constants'
-// import * as SecureStore from 'expo-secure-store'
-import { useAuthContext } from '../context/AuthContext'
-import { useAxiosContext } from '../context/AxiosContext'
+import { ValidateEmail } from '../utilities/validation'
 
-export const ForgotPassword = () => {
-  const [passwordSecure, setPasswordSecure] = useState(true)
+export function ForgotPassword({ navigation }) {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [visible, setVisible] = useState(false)
 
-  const { setToken, setCurrentUser } = useAuthContext()
-  const { Axios } = useAxiosContext()
-
-  const onLogin = async () => {
-    try {
-      const response = await Axios.post('/users/client/login', {
-        email,
-        password,
-      })
-
-      const { accessToken, refreshToken, user } = response.data
-
-      setToken({
-        accessToken,
-        refreshToken,
-      })
-
-      setCurrentUser(user)
-
-      // await SecureStore.setItemAsync('accessToken', accessToken)
-      // await SecureStore.setItemAsync('refreshToken', refreshToken)
-    } catch (error) {
-      console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error)
-      Alert.alert('Login', 'Invalid username or password')
+  const onSubmit = () => {
+    if (ValidateEmail(email)) {
+      navigation.navigate('otp')
+    } else {
+      setVisible(true)
     }
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.formContainer}>
-        {/* <Text style={styles.subtitle}>Easy To Find Your Place</Text> */}
-        <Image
-          resizeMode='contain'
-          style={styles.backgroundImage}
-          // blurRadius={1}
-          source={require('../../assets/login-background.png')}
-        />
-        <Text style={styles.title}>Shiba Booking</Text>
-        <View style={styles.inputsContainer}>
-          <View style={styles.inputGroup}>
-            <Icon
-              name='envelope'
-              style={styles.inputIcon}
-              resizeMode='contain'
-            />
-            <TextInput
-              placeholder='Email Address'
-              placeholderTextColor='#fff'
-              style={[styles.inputField]}
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-            />
-          </View>
-
-          <View style={{ height: 25 }} />
-
-          <View style={styles.inputGroup}>
-            <Icon name='key' style={styles.inputIcon} resizeMode='contain' />
-            <TextInput
-              placeholder='Password'
-              secureTextEntry={passwordSecure}
-              placeholderTextColor='#fff'
-              style={[styles.inputField, styles.inputEndingSpace]}
-              value={password}
-              onChangeText={(text) => setPassword(text)}
-            />
-            <TouchableWithoutFeedback>
-              <View style={styles.endingAction}>
-                <Icon
-                  name={passwordSecure ? 'eye-slash' : 'eye'}
-                  style={[styles.inputIcon, styles.inputEndingIcon]}
-                  resizeMode='contain'
-                  onPress={() => setPasswordSecure(!passwordSecure)}
-                />
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </View>
-
-        <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor={PRIMARY_UNDERLAY_COLOR}
-          style={styles.loginBtn}
-          onPress={() => onLogin()}
-        >
-          <Text style={styles.loginText}>Sign In</Text>
-        </TouchableHighlight>
-        <View style={styles.accountActions}>
-          <TouchableOpacity
-            onPress={() => {
-              RootNavigation.navigate('forgotpassword')
-            }}
-          >
-            <Text style={styles.accountActionText}>Forgot Password?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              RootNavigation.navigate('register')
-            }}
-          >
-            <Text style={styles.accountActionText}>Register Now?</Text>
-          </TouchableOpacity>
-        </View>
+      <Image
+        resizeMode='contain'
+        style={styles.backgroundImage}
+        source={require('../../assets/forgotpassword-background.png')}
+      />
+      <View style={styles.contentContainer}>
+        <Title>Forgot your password?</Title>
+        <Caption style={{ textAlign: 'center', paddingHorizontal: '15%' }}>
+          Don't worry! Please enter the email address associated with your
+          account.
+        </Caption>
       </View>
+      <View style={styles.inputContainer}>
+        <View style={styles.inputGroup}>
+          <Icon name='envelope' style={styles.inputIcon} resizeMode='contain' />
+          <TextInput
+            placeholder='Email Address'
+            placeholderTextColor='#fff'
+            style={[styles.inputField]}
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            onBlur={(text) => !ValidateEmail(text) && setVisible(true)}
+          />
+        </View>
+        <HelperText
+          type='error'
+          visible={visible}
+          style={{ fontSize: 16, color: 'red', marginLeft: 15 }}
+        >
+          Invalid email.
+        </HelperText>
+      </View>
+
+      <TouchableHighlight
+        activeOpacity={0.6}
+        underlayColor={PRIMARY_UNDERLAY_COLOR}
+        style={styles.btn}
+        onPress={() => onSubmit()}
+      >
+        <Text style={styles.btnText}>Submit</Text>
+      </TouchableHighlight>
     </View>
   )
 }
@@ -136,71 +74,22 @@ export const ForgotPassword = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
     justifyContent: 'center',
     alignContent: 'center',
-    colors: { backdrop: 'rgba(255, 255, 255, 0.7)' },
+    paddingHorizontal: '5%',
+    backgroundColor: '#fff',
   },
   backgroundImage: {
     textAlign: 'center',
-    height: '20%',
+    height: '35%',
   },
-  formContainer: {
-    flex: 1,
+  contentContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
-    top: 0,
-    zIndex: 9,
-    paddingHorizontal: '8%',
   },
-  title: {
-    fontSize: 38,
-    fontWeight: 'bold',
-    fontFamily: 'Plus Jakarta Sans',
-    color: '#1a2f3b',
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  subtitle: {
-    fontSize: 13,
-    // color: '#1a2f3b',
-    textAlign: 'center',
-  },
-  inputsContainer: {
+  inputContainer: {
     paddingVertical: 30,
     width: '100%',
-  },
-  accountActions: {
-    width: '100%',
-    marginTop: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
-  accountActionText: {
-    color: '#000',
-    fontSize: 14,
-    fontWeight: '600',
-    fontFamily: 'Plus Jakarta Sans',
-  },
-  loginBtn: {
-    paddingVertical: 15,
-    paddingHorizontal: 25,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
-    backgroundColor: PRIMARY_LIGHT_COLOR,
-    width: '100%',
-    alignItems: 'center',
-  },
-  loginText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '700',
-    fontFamily: 'Plus Jakarta Sans',
   },
   inputGroup: {
     width: '100%',
@@ -231,11 +120,20 @@ const styles = StyleSheet.create({
     fontSize: 13,
     width: '90%',
   },
-  inputEndingSpace: {
-    width: '80%',
+  btn: {
+    paddingVertical: 15,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    backgroundColor: PRIMARY_COLOR_HEX,
+    width: '100%',
+    alignItems: 'center',
   },
-  endingAction: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+  btnText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '700',
+    fontFamily: 'Plus Jakarta Sans',
   },
 })

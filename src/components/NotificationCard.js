@@ -32,7 +32,9 @@ export default function NotificationCard({ data }) {
 
 const styles = StyleSheet.create({
   container: {},
-  card: {},
+  card: {
+    backgroundColor: '#fff',
+  },
   avatar: {
     backgroundColor: WARNING_COLOR_HEX,
     justifyContent: 'center',

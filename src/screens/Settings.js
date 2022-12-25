@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ScrollView, StyleSheet, TouchableRipple, View } from 'react-native'
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Avatar, List, Switch, Text } from 'react-native-paper'
 import { useAuthContext } from '../context/AuthContext'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
@@ -16,7 +16,7 @@ export default function Settings() {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {currentUser && (
-        <TouchableRipple style={styles.card}>
+        <TouchableOpacity style={styles.card}>
           <List.Item
             title={currentUser.fullName}
             left={() => (
@@ -34,13 +34,13 @@ export default function Settings() {
               fontFamily: 'Plus Jakarta Sans',
             }}
           />
-        </TouchableRipple>
+        </TouchableOpacity>
       )}
       <View style={styles.card}>
         <List.Section>
           <List.Subheader style={styles.title}>About</List.Subheader>
           <View style={styles.listItem}>
-            <TouchableRipple>
+            <TouchableOpacity>
               <List.Item
                 title='Language'
                 left={() => (
@@ -65,8 +65,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableRipple>
-            <TouchableRipple>
+            </TouchableOpacity>
+            <TouchableOpacity>
               <List.Item
                 title='Notification'
                 left={() => (
@@ -84,8 +84,8 @@ export default function Settings() {
                   />
                 )}
               />
-            </TouchableRipple>
-            <TouchableRipple>
+            </TouchableOpacity>
+            <TouchableOpacity>
               <List.Item
                 title='Introduction'
                 left={() => (
@@ -97,8 +97,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableRipple>
-            <TouchableRipple>
+            </TouchableOpacity>
+            <TouchableOpacity>
               <List.Item
                 title='FAQ'
                 left={() => (
@@ -114,8 +114,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableRipple>
-            <TouchableRipple>
+            </TouchableOpacity>
+            <TouchableOpacity>
               <List.Item
                 title='Help'
                 left={() => (
@@ -131,7 +131,7 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableRipple>
+            </TouchableOpacity>
           </View>
         </List.Section>
       </View>
@@ -139,7 +139,7 @@ export default function Settings() {
         <List.Section>
           <List.Subheader style={styles.title}>Security</List.Subheader>
           <View style={styles.listItem}>
-            <TouchableRipple>
+            <TouchableOpacity>
               <List.Item
                 title='Privacy policy'
                 left={() => (
@@ -155,8 +155,8 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableRipple>
-            <TouchableRipple>
+            </TouchableOpacity>
+            <TouchableOpacity>
               <List.Item
                 title='Terms & Conditions'
                 left={() => (
@@ -172,11 +172,11 @@ export default function Settings() {
                   </View>
                 )}
               />
-            </TouchableRipple>
+            </TouchableOpacity>
           </View>
         </List.Section>
       </View>
-      <TouchableRipple style={styles.card}>
+      <TouchableOpacity style={styles.card}>
         <List.Item
           title='Log out'
           right={() => (
@@ -185,7 +185,7 @@ export default function Settings() {
             </View>
           )}
         />
-      </TouchableRipple>
+      </TouchableOpacity>
     </ScrollView>
   )
 }

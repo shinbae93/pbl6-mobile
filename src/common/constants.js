@@ -84,3 +84,6 @@ export const BOOKING_STATUSES = {
     color: '#000000',
   },
 }
+
+export const DEFAULT_IMG =
+  'https://csm-global-files-staging.enouvo.com/1669283320929-download456.jpg'
