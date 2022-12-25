@@ -6,6 +6,7 @@ import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { PRIMARY_COLOR_HEX } from '../common/constants'
+import { navigate } from '../navigation/RootNavigation'
 
 export default function Settings() {
   const { currentUser } = useAuthContext()
@@ -16,7 +17,12 @@ export default function Settings() {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {currentUser && (
-        <TouchableOpacity style={styles.card}>
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => {
+            navigate('profile')
+          }}
+        >
           <List.Item
             title={currentUser.fullName}
             left={() => (

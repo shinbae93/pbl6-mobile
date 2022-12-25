@@ -310,17 +310,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    // backgroundColor: 'rgba(0, 0, 0, 0.8)',
     backgroundColor: '#fff',
   },
   inputIcon: {
     marginRight: 20,
     fontSize: 18,
-    // color: '#fff',
   },
   inputEndingIcon: {
     marginRight: 0,
-    // color: '#fff',
   },
   inputField: {
     color: SILVER_COLOR_HEX,
@@ -351,6 +348,5 @@ const styles = StyleSheet.create({
     marginHorizontal: '25%',
     padding: 20,
     borderRadius: 15,
-    // marginVertical: '50%',
   },
 })

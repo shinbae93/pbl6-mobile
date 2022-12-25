@@ -46,10 +46,11 @@ export default function NotificationCard({ data }) {
       onPress={() => {
         if (!isRead) {
           readNoti()
-          navigate('booking-detail', {
-            id: bookingId,
-          })
         }
+
+        navigate('booking-detail', {
+          id: bookingId,
+        })
       }}
     />
   )

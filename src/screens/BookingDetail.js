@@ -10,10 +10,6 @@ import { BOOKING_STATUS_COLORS } from '../common/constants'
 export default function BookingDetail({ route }) {
   const { id } = route.params
   const [booking, setBooking] = useState(null)
-  console.log(
-    '🚀 ~ file: BookingDetail.js:9 ~ BookingDetail ~ booking',
-    booking
-  )
 
   const { Axios } = useAxiosContext()
 
@@ -34,7 +30,6 @@ export default function BookingDetail({ route }) {
     fetchBooking()
   }, [])
 
-  // if (booking) return <BookingCard data={booking} />
   return (
     <Card style={styles.card}>
       <Card.Cover source={{ uri: booking?.imgUrl }} style={styles.coverImg} />
