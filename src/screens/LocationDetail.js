@@ -54,7 +54,7 @@ export default function LocationDetail({ route }) {
   }, [])
 
   const renderItem = ({ item }) => {
-    return <RoomCard data={{ ...item }} />
+    return <RoomCard data={{ ...item, locationId: id }} />
   }
 
   return (

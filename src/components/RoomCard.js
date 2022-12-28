@@ -9,7 +9,7 @@ import LineDivider from './LineDivider'
 import { PRIMARY_COLOR_HEX } from '../common/constants'
 
 export default function RoomCard({ data }) {
-  const { id, name, imgUrl, capacity, price, availableDay } = data
+  const { id, name, imgUrl, capacity, price, availableDay, locationId } = data
 
   return (
     <Surface style={styles.container} key={id}>
@@ -59,7 +59,13 @@ export default function RoomCard({ data }) {
                     </Text>
                   </Text>
                   <LineDivider />
-                  <Button mode='contained' style={styles.button}>
+                  <Button
+                    mode='contained'
+                    style={styles.button}
+                    onPress={() => {
+                      navigate('create-booking', { roomId: id, locationId })
+                    }}
+                  >
                     Rent now
                   </Button>
                 </View>

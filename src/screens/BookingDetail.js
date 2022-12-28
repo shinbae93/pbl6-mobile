@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAxiosContext } from '../context/AxiosContext'
-import { StyleSheet, View } from 'react-native'
+import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { Card, Paragraph, Text, Title } from 'react-native-paper'
 import LineDivider from '../components/LineDivider'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -31,51 +31,60 @@ export default function BookingDetail({ route }) {
   }, [])
 
   return (
-    <Card style={styles.card}>
-      <Card.Cover source={{ uri: booking?.imgUrl }} style={styles.coverImg} />
-      <Card.Content>
-        <Title>Booking #{booking?.id}</Title>
-        <Paragraph>Start: {FormatDatetime(booking?.startDay)}</Paragraph>
-        <Paragraph>
-          Duration: {booking?.monthNumber}{' '}
-          {booking?.monthNumber >= 2 ? 'months' : 'month'}
-        </Paragraph>
-        <Paragraph>Room: {booking?.roomName}</Paragraph>
-        <Text>
-          Status:{' '}
-          <Text
-            style={[
-              styles.status,
-              { backgroundColor: BOOKING_STATUS_COLORS[booking?.status] },
-            ]}
-          >
-            {booking?.status}
+    <SafeAreaView>
+      <Card style={styles.card}>
+        <Card.Cover source={{ uri: booking?.imgUrl }} style={styles.coverImg} />
+        <Card.Content>
+          <Title>Booking #{booking?.id}</Title>
+          <Paragraph>Start: {FormatDatetime(booking?.startDay)}</Paragraph>
+          <Paragraph>
+            Duration: {booking?.monthNumber}{' '}
+            {booking?.monthNumber >= 2 ? 'months' : 'month'}
+          </Paragraph>
+          <Paragraph>Room: {booking?.roomName}</Paragraph>
+          <Text>
+            Status:{' '}
+            <Text
+              style={[
+                styles.status,
+                { backgroundColor: BOOKING_STATUS_COLORS[booking?.status] },
+              ]}
+            >
+              {booking?.status}
+            </Text>
           </Text>
-        </Text>
-        {booking?.overDueDay && (
-          <Paragraph>Overdue at: {booking?.overDueDay}</Paragraph>
-        )}
-        <LineDivider />
-        <View style={styles.utilities}>
-          <View style={styles.utilitiesTitle}>
-            <View style={styles.icon}>
-              <Icon name='md-list' resizeMode='contain' />
+          {booking?.overDueDay && (
+            <Paragraph>Overdue at: {booking?.overDueDay}</Paragraph>
+          )}
+        </Card.Content>
+        <Card.Content collapsable={false}>
+          <LineDivider />
+          <View style={styles.utilities}>
+            <View style={styles.utilitiesTitle}>
+              <View style={styles.icon}>
+                <Icon name='md-list' resizeMode='contain' />
+              </View>
+              <Text style={styles.utilitiesTitleText}>Utilities</Text>
             </View>
-            <Text style={styles.utilitiesTitleText}>Utilities</Text>
+
+            <View style={styles.utilityList}>
+              {booking?.utilities?.map((utility, index) => {
+                console.log(
+                  '🚀 ~ file: BookingDetail.js:68 ~ {booking?.utilities?.map ~ utility',
+                  utility
+                )
+                return (
+                  <Text
+                    style={[styles.text, styles.infoText, styles.utilityItem]}
+                    key={index}
+                  >{`${utility?.name}: ${utility?.price} VND`}</Text>
+                )
+              })}
+            </View>
           </View>
-          <View style={styles.utilityList}>
-            {booking?.utilities?.map((utility, index) => {
-              return (
-                <Text
-                  style={[styles.text, styles.infoText, styles.utilityItem]}
-                  key={index}
-                >{`${utility?.name}: ${utility?.price} VND`}</Text>
-              )
-            })}
-          </View>
-        </View>
-      </Card.Content>
-    </Card>
+        </Card.Content>
+      </Card>
+    </SafeAreaView>
   )
 }
 
@@ -92,13 +101,15 @@ const styles = StyleSheet.create({
     shadowRadius: 2.84,
     elevation: 4,
     borderRadius: 10,
+    backgroundColor: '#fff',
+    height: '97%',
   },
   coverImg: {
     borderRadius: 10,
     margin: 10,
   },
   utilities: {
-    marginVertical: 15,
+    marginTop: 15,
   },
   utilitiesTitle: {
     flexDirection: 'row',

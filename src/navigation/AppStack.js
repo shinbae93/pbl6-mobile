@@ -4,6 +4,9 @@ import LocationDetail from '../screens/LocationDetail'
 import RoomDetail from '../screens/RoomDetail'
 import Profile from '../screens/Profile'
 import { TabNavigator } from './TabNavigator'
+import CreateBooking from '../screens/CreateBooking'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { navigate, popToTop } from './RootNavigation'
 
 const Stack = createNativeStackNavigator()
 
@@ -39,6 +42,24 @@ export const AppStack = () => {
         options={{
           headerShown: true,
           title: 'Booking Detail',
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <Icon
+              name='arrow-back'
+              size={24}
+              onPress={() => {
+                navigate('bookings')
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name='create-booking'
+        component={CreateBooking}
+        options={{
+          headerShown: true,
+          title: 'Create Booking',
           headerTitleAlign: 'center',
         }}
       />

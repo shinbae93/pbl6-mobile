@@ -1,65 +1,55 @@
-import React, { useState } from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  Alert,
-  ScrollView,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import {
-  CLIENT_ROLE_ID,
-  PRIMARY_COLOR_HEX,
-  PRIMARY_UNDERLAY_COLOR,
-  SUCCESS_COLOR_HEX,
-} from '../common/constants'
+import React, { useEffect, useState } from 'react'
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
+import { PRIMARY_COLOR_HEX, PRIMARY_UNDERLAY_COLOR } from '../common/constants'
 import { useAxiosContext } from '../context/AxiosContext'
 import { Avatar, Provider, RadioButton, TextInput } from 'react-native-paper'
-import DropDownPicker from 'react-native-dropdown-picker'
 import { useAuthContext } from '../context/AuthContext'
 
 export default function Profile() {
   const { Axios } = useAxiosContext()
-  const { currentUser } = useAuthContext()
+  const { currentUser, setCurrentUser } = useAuthContext()
 
-  const [me, setMe] = useState(currentUser)
+  const [me, setMe] = useState(me)
   const [firstName, setFirstName] = useState(me?.firstName)
   const [lastName, setLastName] = useState(me?.lastName)
   const [phone, setPhone] = useState(me?.phone)
   const [gender, setGender] = useState(me?.gender)
-  const [password, setPassword] = useState('')
-  const [isOpen, setIsOpen] = useState(false)
-  const [items, setItems] = useState([
-    {
-      label: 'Male',
-      value: true,
-      icon: () => <Icon name='male' size={18} />,
-    },
-    {
-      label: 'Female',
-      value: false,
-      icon: () => <Icon name='female' size={18} />,
-    },
-  ])
 
-  const onRegister = async () => {
+  const onUpdateMe = async () => {
     try {
-      await Axios.post('/users/client/login', {
+      const res = await Axios.post(`/users/${me?.id}`, {
         firstName,
         lastName,
         phone,
         gender,
         email,
-        password,
-        roleId: CLIENT_ROLE_ID,
       })
+
+      setMe(res.data)
+      setCurrentUser(res.data)
     } catch (error) {
       console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error.message)
-      Alert.alert('Login', 'Invalid username or password')
     }
   }
+
+  const fetchMe = async () => {
+    Axios.get(`v1/me`)
+      .then((res) => {
+        console.log('🚀 ~ file: Profile.js:37 ~ .then ~ res', res.data)
+        setMe(res.data)
+        setFirstName(res.data.firstName)
+        setLastName(res.data.lastName)
+        setPhone(res.data.phone)
+        setGender(res.data.gender == 'Male')
+      })
+      .catch((err) => {
+        console.log('🚀 ~ file: Profile.js:40 ~ fetchMe ~ err', err.message)
+      })
+  }
+
+  useEffect(() => {
+    fetchMe()
+  }, [])
 
   return (
     <Provider>
@@ -181,7 +171,7 @@ export default function Profile() {
               activeOpacity={0.6}
               underlayColor={PRIMARY_UNDERLAY_COLOR}
               style={[styles.btn, { backgroundColor: PRIMARY_COLOR_HEX }]}
-              onPress={() => onRegister()}
+              onPress={onUpdateMe}
             >
               <Text style={styles.btnText}>Save</Text>
             </TouchableHighlight>

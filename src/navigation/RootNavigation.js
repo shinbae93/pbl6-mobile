@@ -16,3 +16,7 @@ export function pop() {
 export function push(...args) {
   navigationRef.current?.dispatch(StackActions.push(...args))
 }
+
+export function popToTop() {
+  navigationRef.current?.dispatch(StackActions.popToTop())
+}
