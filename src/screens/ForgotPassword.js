@@ -17,15 +17,26 @@ export function ForgotPassword({ navigation }) {
   const [email, setEmail] = useState('')
   const [visible, setVisible] = useState(false)
 
-  const onSubmit = () => {
+  const { Axios } = useAxiosContext()
+
+  const onGetOTP = () => {
     if (ValidateEmail(email)) {
-      const { Axios } = useAxiosContext()
       Axios.post('v1/forgot-password', {
         email,
         realEmail: 'sine.hungnguyen@gmail.com',
       })
-
-      navigation.navigate('otp')
+        .then((result) => {
+          navigation.navigate('otp', {
+            message: result.data.message,
+            userId: result.data.userId,
+          })
+        })
+        .catch((err) => {
+          console.log(
+            '🚀 ~ file: ForgotPassword.js:35 ~ onGetOTP ~ err',
+            err.message
+          )
+        })
     } else {
       setVisible(true)
     }
@@ -54,7 +65,6 @@ export function ForgotPassword({ navigation }) {
             style={[styles.inputField]}
             value={email}
             onChangeText={(text) => setEmail(text)}
-            onBlur={(text) => !ValidateEmail(text) && setVisible(true)}
           />
         </View>
         <HelperText
@@ -70,9 +80,9 @@ export function ForgotPassword({ navigation }) {
         activeOpacity={0.6}
         underlayColor={PRIMARY_UNDERLAY_COLOR}
         style={styles.btn}
-        onPress={() => onSubmit()}
+        onPress={() => onGetOTP()}
       >
-        <Text style={styles.btnText}>Submit</Text>
+        <Text style={styles.btnText}>Get OTP</Text>
       </TouchableHighlight>
     </View>
   )
@@ -81,13 +91,14 @@ export function ForgotPassword({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignContent: 'center',
     paddingHorizontal: '5%',
     backgroundColor: '#fff',
+    paddingTop: 50,
   },
   backgroundImage: {
-    textAlign: 'center',
+    textAlign: 'top',
     height: '35%',
   },
   contentContainer: {
@@ -95,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    paddingTop: 30,
+    paddingTop: 50,
     width: '100%',
   },
   inputGroup: {

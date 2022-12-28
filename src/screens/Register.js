@@ -57,6 +57,9 @@ export const Register = ({ navigation }) => {
   const { Axios } = useAxiosContext()
 
   const onRegister = async () => {
+    if (password != confirmedPassword) {
+      Alert.alert('Error', `Your confirm password doesn't match your password`)
+    }
     try {
       await Axios.post('v1/client/sign-up', {
         firstName,

@@ -4,7 +4,8 @@ import { Login } from '../screens/Login'
 import { ForgotPassword } from '../screens/ForgotPassword'
 import { Register } from '../screens/Register'
 import { Welcome } from '../screens/Welcome'
-import OTP from '../screens/OTP'
+import { OTP } from '../screens/OTP'
+import { ChangePassword } from '../screens/ChangePassword'
 
 const Stack = createNativeStackNavigator()
 
@@ -47,6 +48,14 @@ export const AuthStack = () => {
         options={{
           headerShown: true,
           title: 'OTP',
+        }}
+      />
+      <Stack.Screen
+        name='changepassword'
+        component={ChangePassword}
+        options={{
+          headerShown: false,
+          title: '',
         }}
       />
       <Stack.Screen
