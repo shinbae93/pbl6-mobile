@@ -48,40 +48,37 @@ export const CLIENT_ROLE_ID = '636723d347707eeadf80eb59'
 // Done: 7
 
 export const BOOKING_STATUSES = {
-  APPROVED: {
-    id: 1,
-    name: 'Approved',
-    color: '#4ade80',
+  ALL: {
+    id: null,
+    name: 'All',
   },
   PENDING: {
-    id: 2,
+    id: 1,
     name: 'Pending',
-    color: '#facc15',
+  },
+  APPROVED: {
+    id: 2,
+    name: 'Approved',
   },
   REJECT: {
     id: 3,
     name: 'Reject',
-    color: '#f87171',
   },
   SUCCESS: {
     id: 4,
     name: 'Success',
-    color: '#c084fc',
   },
   OVERDUEPAYMENT: {
     id: 5,
     name: 'OverDuePayment',
-    color: '#f472b6',
   },
   EXTENDDUEPAYMENT: {
     id: 6,
     name: 'ExtendDueBooking',
-    color: '#fb923c',
   },
   DONE: {
     id: 7,
     name: 'Done',
-    color: '#000000',
   },
 }
 
