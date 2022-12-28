@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet, View } from 'react-native'
+import { Alert, FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import LineDivider from '../components/LineDivider'
 import NotificationCard from '../components/NotificationCard'
 import { useAxiosContext } from '../context/AxiosContext'
@@ -43,6 +43,21 @@ export default function Notifications() {
       style={styles.list}
       contentContainerStyle={{ paddingBottom: 80 }}
       showsVerticalScrollIndicator={false}
+      ListEmptyComponent={() => (
+        <View
+          style={{
+            height: '100%',
+            alignSelf: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Image
+            source={require('../../assets/notifications/no-notifications.png')}
+          />
+          <Text style={{ textAlign: 'center' }}>No notifications.</Text>
+        </View>
+      )}
     />
   )
 }
