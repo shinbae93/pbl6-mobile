@@ -18,11 +18,20 @@ import {
   SILVER_COLOR_HEX,
 } from '../common/constants'
 import { useAxiosContext } from '../context/AxiosContext'
-import { Caption, Paragraph, Provider, Title } from 'react-native-paper'
+import {
+  Button,
+  Caption,
+  Dialog,
+  Paragraph,
+  Portal,
+  Provider,
+  Title,
+} from 'react-native-paper'
 import DropDownPicker from 'react-native-dropdown-picker'
 
 export const Register = ({ navigation }) => {
   const [passwordSecure, setPasswordSecure] = useState(true)
+  const [confirmPasswordSecure, setConfirmPasswordSecure] = useState(true)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [phone, setPhone] = useState('')
@@ -31,6 +40,7 @@ export const Register = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const [confirmedPassword, setConfirmedPassword] = useState('')
   const [isOpen, setIsOpen] = useState(false)
+  const [visible, setVisible] = useState(false)
   const [items, setItems] = useState([
     {
       label: 'Male',
@@ -48,7 +58,7 @@ export const Register = ({ navigation }) => {
 
   const onRegister = async () => {
     try {
-      await Axios.post('/users/client/login', {
+      await Axios.post('v1/client/sign-up', {
         firstName,
         lastName,
         phone,
@@ -57,9 +67,13 @@ export const Register = ({ navigation }) => {
         password,
         roleId: CLIENT_ROLE_ID,
       })
+
+      setVisible(true)
     } catch (error) {
-      console.log('🚀 ~ file: Login.js:54 ~ onLogin ~ error', error.message)
-      Alert.alert('Login', 'Invalid username or password')
+      console.log(
+        '🚀 ~ file: Register.js:73 ~ onRegister ~ error',
+        error.message
+      )
     }
   }
 
@@ -150,6 +164,7 @@ export const Register = ({ navigation }) => {
                   style={[styles.inputField]}
                   value={phone}
                   onChangeText={(text) => setPhone(text)}
+                  keyboardType='numeric'
                 />
               </View>
 
@@ -235,7 +250,7 @@ export const Register = ({ navigation }) => {
               />
               <TextInput
                 placeholder='Confirm Password'
-                secureTextEntry={passwordSecure}
+                secureTextEntry={confirmPasswordSecure}
                 style={[styles.inputField, styles.inputEndingSpace]}
                 value={confirmedPassword}
                 onChangeText={(text) => setConfirmedPassword(text)}
@@ -243,10 +258,14 @@ export const Register = ({ navigation }) => {
               <TouchableWithoutFeedback>
                 <View>
                   <Icon
-                    name={passwordSecure ? 'eye-off-outline' : 'eye-outline'}
+                    name={
+                      confirmPasswordSecure ? 'eye-off-outline' : 'eye-outline'
+                    }
                     style={[styles.inputIcon, styles.inputEndingIcon]}
                     resizeMode='contain'
-                    onPress={() => setPasswordSecure(!passwordSecure)}
+                    onPress={() =>
+                      setConfirmPasswordSecure(!confirmPasswordSecure)
+                    }
                   />
                 </View>
               </TouchableWithoutFeedback>
@@ -262,6 +281,30 @@ export const Register = ({ navigation }) => {
             <Text style={styles.btnText}>Register</Text>
           </TouchableHighlight>
         </View>
+        <Portal>
+          <Dialog
+            visible={visible}
+            onDismiss={() => {
+              setVisible(false)
+            }}
+          >
+            <Dialog.Content>
+              <Paragraph>
+                congratulation! You have just create a new account. Login now.
+              </Paragraph>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button
+                onPress={() => {
+                  setVisible(false)
+                  RootNavigation.navigate('login')
+                }}
+              >
+                Login
+              </Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
       </View>
     </Provider>
   )

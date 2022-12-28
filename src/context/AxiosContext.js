@@ -14,7 +14,7 @@ export const AxiosProvider = ({ children }) => {
 
   Axios.interceptors.request.use(
     (config) => {
-      if (!config.headers.Authorization) {
+      if (!config.headers.Authorization && token) {
         config.headers.Authorization = `Bearer ${token}`
       }
 

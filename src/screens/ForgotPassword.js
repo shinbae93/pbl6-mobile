@@ -11,6 +11,7 @@ import { Caption, HelperText, Title } from 'react-native-paper'
 import { PRIMARY_COLOR_HEX, PRIMARY_UNDERLAY_COLOR } from '../common/constants'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { ValidateEmail } from '../utilities/validation'
+import { useAxiosContext } from '../context/AxiosContext'
 
 export function ForgotPassword({ navigation }) {
   const [email, setEmail] = useState('')
@@ -18,6 +19,12 @@ export function ForgotPassword({ navigation }) {
 
   const onSubmit = () => {
     if (ValidateEmail(email)) {
+      const { Axios } = useAxiosContext()
+      Axios.post('v1/forgot-password', {
+        email,
+        realEmail: 'sine.hungnguyen@gmail.com',
+      })
+
       navigation.navigate('otp')
     } else {
       setVisible(true)
@@ -88,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    paddingVertical: 30,
+    paddingTop: 30,
     width: '100%',
   },
   inputGroup: {
@@ -121,7 +128,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   btn: {
-    paddingVertical: 15,
+    paddingVertical: 13,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
